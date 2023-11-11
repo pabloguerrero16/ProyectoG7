@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CANTON">
+          <Key>
+            <PropertyRef Name="ConCanton" />
+          </Key>
+          <Property Name="ConCanton" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="IdProvincia" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PROVINCIA">
+          <Key>
+            <PropertyRef Name="ConProvincia" />
+          </Key>
+          <Property Name="ConProvincia" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ConRol" />
+          </Key>
+          <Property Name="ConRol" Type="bigint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ConUsuario" />
+          </Key>
+          <Property Name="ConUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasenna" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ConRol" Type="bigint" />
+          <Property Name="ConProvincia" Type="bigint" />
+          <Property Name="ConCanton" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__CANTON__IdProvin__3B75D760">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="CANTON">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConCant__403A8C7D">
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANTON">
+              <PropertyRef Name="ConCanton" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConCanton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConProv__3F466844">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConRol__3E52440B">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ConRol" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProyectoG7ModelStoreContainer">
+          <EntitySet Name="CANTON" EntityType="Self.CANTON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CANTON__IdProvin__3B75D760" Association="Self.FK__CANTON__IdProvin__3B75D760">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="CANTON" EntitySet="CANTON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConCant__403A8C7D" Association="Self.FK__USUARIO__ConCant__403A8C7D">
+            <End Role="CANTON" EntitySet="CANTON" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConProv__3F466844" Association="Self.FK__USUARIO__ConProv__3F466844">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConRol__3E52440B" Association="Self.FK__USUARIO__ConRol__3E52440B">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoG7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CANTON">
+          <Key>
+            <PropertyRef Name="ConCanton" />
+          </Key>
+          <Property Name="ConCanton" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProvincia" Type="Int64" />
+          <NavigationProperty Name="PROVINCIA" Relationship="Self.FK__CANTON__IdProvin__3B75D760" FromRole="CANTON" ToRole="PROVINCIA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConCant__403A8C7D" FromRole="CANTON" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="PROVINCIA">
+          <Key>
+            <PropertyRef Name="ConProvincia" />
+          </Key>
+          <Property Name="ConProvincia" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CANTON" Relationship="Self.FK__CANTON__IdProvin__3B75D760" FromRole="PROVINCIA" ToRole="CANTON" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConProv__3F466844" FromRole="PROVINCIA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ConRol" />
+          </Key>
+          <Property Name="ConRol" Type="Int64" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConRol__3E52440B" FromRole="Rol" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ConUsuario" />
+          </Key>
+          <Property Name="ConUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasenna" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConRol" Type="Int64" />
+          <Property Name="ConProvincia" Type="Int64" />
+          <Property Name="ConCanton" Type="Int64" />
+          <NavigationProperty Name="CANTON" Relationship="Self.FK__USUARIO__ConCant__403A8C7D" FromRole="USUARIO" ToRole="CANTON" />
+          <NavigationProperty Name="PROVINCIA" Relationship="Self.FK__USUARIO__ConProv__3F466844" FromRole="USUARIO" ToRole="PROVINCIA" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK__USUARIO__ConRol__3E52440B" FromRole="USUARIO" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__CANTON__IdProvin__3B75D760">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="CANTON">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConCant__403A8C7D">
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANTON">
+              <PropertyRef Name="ConCanton" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConCanton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConProv__3F466844">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConRol__3E52440B">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ConRol" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoG7Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CANTON" EntityType="Self.CANTON" />
+          <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__CANTON__IdProvin__3B75D760" Association="Self.FK__CANTON__IdProvin__3B75D760">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="CANTON" EntitySet="CANTON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConCant__403A8C7D" Association="Self.FK__USUARIO__ConCant__403A8C7D">
+            <End Role="CANTON" EntitySet="CANTON" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConProv__3F466844" Association="Self.FK__USUARIO__ConProv__3F466844">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConRol__3E52440B" Association="Self.FK__USUARIO__ConRol__3E52440B">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <FunctionImport Name="RegistrarCuenta">
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IniciarSesion" ReturnType="Collection(ProyectoG7Model.IniciarSesion_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="IniciarSesion_Result">
+          <Property Type="Int64" Name="ConUsuario" Nullable="false" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="DescripcionRol" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="false" MaxLength="35" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoG7ModelStoreContainer" CdmEntityContainer="ProyectoG7Entities">
+          <EntitySetMapping Name="CANTON">
+            <EntityTypeMapping TypeName="ProyectoG7Model.CANTON">
+              <MappingFragment StoreEntitySet="CANTON">
+                <ScalarProperty Name="ConCanton" ColumnName="ConCanton" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVINCIA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.PROVINCIA">
+              <MappingFragment StoreEntitySet="PROVINCIA">
+                <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="ProyectoG7Model.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+                <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+                <ScalarProperty Name="ConCanton" ColumnName="ConCanton" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarCuenta" FunctionName="ProyectoG7Model.Store.RegistrarCuenta" />
+          <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="ProyectoG7Model.Store.IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoG7Model.IniciarSesion_Result">
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

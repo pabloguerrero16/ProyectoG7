@@ -1,0 +1,54 @@
+﻿@model WebProyecto.Entities.UsuarioEnt
+
+@{ 
+    ViewBag.Title = "IniciarSesion";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="row w-100 m-0">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 mx-auto">
+                <div class="card-body px-5 py-5">
+                    <h3 class="card-title text-left mb-3">Iniciar Sesión</h3>
+
+                    @if (ViewBag.MensajeUsuario != null)
+                    {
+                        <div class="alert alert-info" role="alert" style="text-align:center">
+                            @ViewBag.MensajeUsuario
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("IniciarSesion", "Login", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            @Html.TextBoxFor(m => m.Correo, new { @class = "form-control p_input", @type = "email", @placeholder = "Correo Electrónico" })
+                            <span id="CorreoMsg"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            @Html.TextBoxFor(m => m.Contrasenna, new { @class = "form-control p_input", @type = "password", @placeholder = "Contraseña" })
+                        </div>
+                        <div class="form-group d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+
+                            </div>
+                            <a href="#" class="forgot-pass">Restablecer Contraseña</a>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block enter-btn">Iniciar Sesión</button>
+                        </div>
+
+                        <p class="sign-up">¿No tienes una cuenta?<a href="@Url.Action("RegistrarCuenta", "Login")"> Registrate aquí</a></p>
+                        <p class="sign-up"><a href="@Url.Action("Index", "Login")">Volver al inicio</a></p>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- row ends -->
+</div>
+
