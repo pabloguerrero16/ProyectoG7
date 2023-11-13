@@ -1,0 +1,59 @@
+﻿@model List<WebProyecto.Entities.UsuarioEnt>
+
+@{
+    ViewBag.Title = "ConsultaUsuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        @if (ViewBag.MensajeUsuario != null)
+        {
+            <div class="alert alert-info" role="alert" style="text-align:center">
+                @ViewBag.MensajeUsuario
+            </div>
+        }
+        <div class="card-body">
+            <h4 class="card-title">Usuarios</h4>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="color: white">Identificación</th>
+                            <th style="color: white">Nombre Completo</th>
+                            <th style="color: white">Correo Electrónico</th>
+                            <th style="color: white">Rol</th>
+                            <th style="color: white">Cambiar Rol</th>
+                            <th style="color: white">Actualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="color: white" class="py-1">@item.Identificacion</td>
+                                <td style="color: white" class="py-1">@item.Nombre</td>
+                                <td style="color: white" class="py-1">@item.Correo</td>
+
+                                @if (item.ConRol == 1)
+                                {
+                                    <td style="color: white" class="py-1">Usuario</td>
+                                }
+                                else
+                                {
+                                    <td style="color: white" class="py-1">Administrador</td>
+                                }
+
+                                <td style="color: white" class="py-1"><a href="@Url.Action("ActualizarRol","Usuario", new { q = item.ConUsuario})" , class="btn btn-outline-success btn-fw">Actualizar Rol</a></td>
+                                <td style="color: white" class="py-1"><a href="@Url.Action("ActualizarCuenta","Usuario", new { q = item.ConUsuario})" , class="btn btn-outline-warning btn-fw">Actualizar Usuario</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

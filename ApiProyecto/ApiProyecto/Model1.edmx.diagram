@@ -13,6 +13,13 @@
         <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConCant__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConProv__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConRol__3E52440B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="5.375" PointY="11.875" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="5.375" PointY="9.5" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="5.375" PointY="6.625" />
+        <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="7.625" PointY="6" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

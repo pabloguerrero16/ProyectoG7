@@ -13,6 +13,39 @@
           <Property Name="Nombre" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="IdProvincia" Type="bigint" />
         </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ConCategoria" />
+          </Key>
+          <Property Name="ConCategoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="ConMarca" />
+          </Key>
+          <Property Name="ConMarca" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="ConModelo" />
+          </Key>
+          <Property Name="ConModelo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ConProducto" />
+          </Key>
+          <Property Name="ConProducto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConModelo" Type="bigint" />
+          <Property Name="ConMarca" Type="bigint" />
+          <Property Name="ConCategoria" Type="bigint" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="PROVINCIA">
           <Key>
             <PropertyRef Name="ConProvincia" />
@@ -52,6 +85,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PRODUCTO__ConCat__5165187F">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ConCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMar__5070F446">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="ConMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMod__4F7CD00D">
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="ConModelo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__USUARIO__ConCant__403A8C7D">
           <End Role="CANTON" Type="Self.CANTON" Multiplicity="0..1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
@@ -88,6 +157,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsultarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
@@ -100,12 +170,28 @@
         </Function>
         <EntityContainer Name="ProyectoG7ModelStoreContainer">
           <EntitySet Name="CANTON" EntityType="Self.CANTON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CANTON__IdProvin__3B75D760" Association="Self.FK__CANTON__IdProvin__3B75D760">
             <End Role="PROVINCIA" EntitySet="PROVINCIA" />
             <End Role="CANTON" EntitySet="CANTON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConCat__5165187F" Association="Self.FK__PRODUCTO__ConCat__5165187F">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMar__5070F446" Association="Self.FK__PRODUCTO__ConMar__5070F446">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMod__4F7CD00D" Association="Self.FK__PRODUCTO__ConMod__4F7CD00D">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
           <AssociationSet Name="FK__USUARIO__ConCant__403A8C7D" Association="Self.FK__USUARIO__ConCant__403A8C7D">
             <End Role="CANTON" EntitySet="CANTON" />
@@ -246,6 +332,23 @@
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CATEGORIA" EntityType="ProyectoG7Model.CATEGORIA" />
+          <EntitySet Name="MARCA" EntityType="ProyectoG7Model.MARCA" />
+          <EntitySet Name="MODELO" EntityType="ProyectoG7Model.MODELO" />
+          <EntitySet Name="PRODUCTO" EntityType="ProyectoG7Model.PRODUCTO" />
+          <AssociationSet Name="FK__PRODUCTO__ConCat__5165187F" Association="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMar__5070F446" Association="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMod__4F7CD00D" Association="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <FunctionImport Name="ConsultarProductos" ReturnType="Collection(ProyectoG7Model.ConsultarProductos_Result)" />
         </EntityContainer>
         <ComplexType Name="IniciarSesion_Result">
           <Property Type="Int64" Name="ConUsuario" Nullable="false" />
@@ -256,6 +359,90 @@
           <Property Type="String" Name="DescripcionRol" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="DescripcionProvincia" Nullable="false" MaxLength="45" />
           <Property Type="String" Name="DescripcionCanton" Nullable="false" MaxLength="35" />
+        </ComplexType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ConCategoria" />
+          </Key>
+          <Property Name="ConCategoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTO" Relationship="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="ConMarca" />
+          </Key>
+          <Property Name="ConMarca" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTO" Relationship="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446" FromRole="MARCA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="ConModelo" />
+          </Key>
+          <Property Name="ConModelo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTO" Relationship="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D" FromRole="MODELO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ConProducto" />
+          </Key>
+          <Property Name="ConProducto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConModelo" Type="Int64" />
+          <Property Name="ConMarca" Type="Int64" />
+          <Property Name="ConCategoria" Type="Int64" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Stock" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CATEGORIA" Relationship="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="MARCA" Relationship="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446" FromRole="PRODUCTO" ToRole="MARCA" />
+          <NavigationProperty Name="MODELO" Relationship="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D" FromRole="PRODUCTO" ToRole="MODELO" />
+        </EntityType>
+        <Association Name="FK__PRODUCTO__ConCat__5165187F">
+          <End Type="ProyectoG7Model.CATEGORIA" Role="CATEGORIA" Multiplicity="0..1" />
+          <End Type="ProyectoG7Model.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ConCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMar__5070F446">
+          <End Type="ProyectoG7Model.MARCA" Role="MARCA" Multiplicity="0..1" />
+          <End Type="ProyectoG7Model.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="ConMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMod__4F7CD00D">
+          <End Type="ProyectoG7Model.MODELO" Role="MODELO" Multiplicity="0..1" />
+          <End Type="ProyectoG7Model.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="ConModelo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ConsultarProductos_Result">
+          <Property Type="Int64" Name="ConProducto" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DescripcionModelo" Nullable="false" />
+          <Property Type="String" Name="DescripcionMarca" Nullable="false" />
+          <Property Type="String" Name="DescripcionCategoria" Nullable="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int64" Name="Stock" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -314,6 +501,56 @@
                 <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
                 <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
                 <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.MARCA">
+              <MappingFragment StoreEntitySet="MARCA">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ConMarca" ColumnName="ConMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODELO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.MODELO">
+              <MappingFragment StoreEntitySet="MODELO">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ConModelo" ColumnName="ConModelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+                <ScalarProperty Name="ConMarca" ColumnName="ConMarca" />
+                <ScalarProperty Name="ConModelo" ColumnName="ConModelo" />
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarProductos" FunctionName="ProyectoG7Model.Store.ConsultarProductos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoG7Model.ConsultarProductos_Result">
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DescripcionModelo" ColumnName="DescripcionModelo" />
+                <ScalarProperty Name="DescripcionMarca" ColumnName="DescripcionMarca" />
+                <ScalarProperty Name="DescripcionCategoria" ColumnName="DescripcionCategoria" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

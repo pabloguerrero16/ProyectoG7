@@ -32,7 +32,7 @@
                     <span class="nav-link">Navegación</span>
                 </li>
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="@Url.Action("Index","Login")">
+                    <a class="nav-link" href="@Url.Action("ListarProductos","Producto")">
                         <span class="menu-icon">
                             <i class="mdi mdi-store"></i>
                         </span>
@@ -43,52 +43,58 @@
                     @if (Session["ConUsuario"] != null)
                     {
 
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="@Url.Action("PerfilUsuario","Usuario")">
                             <span class="menu-icon">
-                                <i class="mdi mdi-laptop"></i>
+                                <i class="mdi mdi-account"></i>
                             </span>
                             <span class="menu-title">Mi Perfil</span>
                         </a>
-                    }
-                    else
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="@Url.Action("RegistrarCuenta","Login")">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-account-plus"></i>
+                            </span>
+                            <span class="menu-title">Crear Cuenta</span>
+                        </a>
+                    </li>
+
+                }
+             </li>
+
+
+                    @if ((string)Session["Rol"] == "ADMIN")
                     {
+                        <li class="nav-item nav-category">
+                            <span class="nav-link">Administrador</span>
+                        </li>
                         <li class="nav-item menu-items">
-                            <a class="nav-link" href="@Url.Action("RegistrarCuenta","Login")">
+                            <a class="nav-link" href="@Url.Action("ConsultaUsuarios","Usuario")">
                                 <span class="menu-icon">
-                                    <i class="mdi mdi-account-plus"></i>
+                                    <i class="mdi mdi-account-multiple"></i>
                                 </span>
-                                <span class="menu-title">Crear Cuenta</span>
+                                <span class="menu-title">Administrar Usuarios</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item menu-items">
+                            <a class="nav-link" href="@Url.Action("ConsultarProductos","Producto")">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-car"></i>
+                                </span>
+                                <span class="menu-title">Amdministrar Vehículos</span>
                             </a>
                         </li>
                     }
 
 
-                </li>
-                @if ((string)Session["Rol"] == "ADMIN")
-                {
-                    <li class="nav-item nav-category">
-                        <span class="nav-link">Administrador</span>
-                    </li>
-                    <li class="nav-item menu-items">
-                        <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-icon">
-                                <i class="mdi mdi-account-multiple"></i>
-                            </span>
-                            <span class="menu-title">Usuarios</span>
-                        </a>
-                    </li>
 
-                    <li class="nav-item menu-items">
-                        <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-icon">
-                                <i class="mdi mdi-car"></i>
-                            </span>
-                            <span class="menu-title">Vehículos</span>
-                        </a>
-                    </li>
-                }
 
-            </ul>
+                </ul>
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
@@ -129,7 +135,7 @@
 
                                 @if (Session["ConUsuario"] != null)
                                 {
-                                    <a class="dropdown-item preview-item">
+                                    <a class="dropdown-item preview-item" href="@Url.Action("PerfilUsuario","Usuario")">
                                         <div class="preview-thumbnail">
                                             <div class="preview-icon bg-dark rounded-circle">
                                                 <i class="mdi mdi-account"></i>

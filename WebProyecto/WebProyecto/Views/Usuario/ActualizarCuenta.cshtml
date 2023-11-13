@@ -1,0 +1,54 @@
+﻿@model WebProyecto.Entities.UsuarioEnt
+
+@{
+    ViewBag.Title = "ActualizarCuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Actualizar Usuario</h4>
+            @if (ViewBag.MensajeUsuario != null)
+            {
+                <div class="alert alert-info" role="alert" style="text-align:center">
+                    @ViewBag.MensajeUsuario
+                </div>
+            }
+
+            @using (Html.BeginForm("ActualizarCuenta", "Usuario", FormMethod.Post, new { @class = "form-group" }))
+            {
+                @Html.HiddenFor(m => m.ConUsuario)
+
+                <div class="form-group">
+                    <label for="exampleInputName1">Identificación</label>
+                    @Html.TextBoxFor(m => m.Identificacion, new { @onkeyup = "ConsultarNombre()", @class = "form-control", @type = "text", @placeholder = "Identificación", style = "color: white;" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Nombre</label>
+                    @Html.TextBoxFor(m => m.Nombre, new { @readonly = "@readonly", @class = "form-control", @type = "text", @placeholder = "Nombre", @style = "background-color: #2A3038; color: white;" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Correo Electrónico</label>
+                    @Html.TextBoxFor(m => m.Correo, new { @class = "form-control", @type = "text", @placeholder = "Correo Electrónico", style = "color: white;" })
+                    <span id="CorreoMsg"></span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Provincia</label>
+                    @Html.DropDownListFor(m => m.ConProvincia, ViewBag.Provincias as List<SelectListItem>, new { @id = "ddlProvincia", @class = "form-control form-control-lg", @type = "text", @placeholder = "Provincia", style = "color: white;" })
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Cantón</label>
+                    @Html.DropDownListFor(m => m.ConCanton, new List<SelectListItem> { new SelectListItem { Text = "Seleccione", Value = "" } }, new { @id = "ddlCanton", @class = "form-control form-control-lg", @type = "text", @placeholder = "Cantón", style = "color: white;" })
+                </div>
+                
+
+                <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
+                <a href="@Url.Action("Index","Login")"class="btn btn-dark">Volver</a>
+            }
+
+        </div>
+    </div>
+</div>

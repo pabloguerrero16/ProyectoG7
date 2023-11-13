@@ -1,0 +1,51 @@
+﻿@model List<WebProyecto.Entities.ProductoEnt>
+
+@{
+    ViewBag.Title = "ListarProductos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xl-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel owl-loaded owl-drag" id="owl-carousel-basic">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage">
+                                <div class="owl-item cloned" style="width: 231.328px; margin-right: 10px;">
+                                    <div class="item">
+                                        <img src="~/template/images/default.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex py-4">
+                        <div class="preview-list w-100">
+                            <div class="preview-item p-0">
+
+                                <div class="preview-item-content d-flex flex-grow">
+                                    <div class="flex-grow">
+                                        <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                            <h3 class="card-title">@item.DescripcionMarca  @item.DescripcionModelo</h3>
+
+                                        </div>
+                                        <h6 class="preview-subject">@item.DescripcionCategoria</h6>
+                                        <p class="text-muted text-small">@item.Nombre</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="preview-subject">@item.Precio</h4>
+                    <button type="button" class="btn btn-primary btn-rounded btn-fw">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
