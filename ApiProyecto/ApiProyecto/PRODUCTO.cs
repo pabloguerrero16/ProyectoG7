@@ -21,6 +21,7 @@ namespace ApiProyecto
         public decimal Precio { get; set; }
         public long Stock { get; set; }
         public string Nombre { get; set; }
+        public string Imagen { get; set; }
     
         public virtual CATEGORIA CATEGORIA { get; set; }
         public virtual MARCA MARCA { get; set; }

@@ -196,6 +196,24 @@
     <Content Include="funciones\Registro.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Productos\1.jpg" />
+    <Content Include="Images\Productos\10.jpg" />
+    <Content Include="Images\Productos\11.jpg" />
+    <Content Include="Images\Productos\12.jpg" />
+    <Content Include="Images\Productos\13.jpg" />
+    <Content Include="Images\Productos\14.jpg" />
+    <Content Include="Images\Productos\15.jpg" />
+    <Content Include="Images\Productos\16.jpg" />
+    <Content Include="Images\Productos\17.jpg" />
+    <Content Include="Images\Productos\2.jpg" />
+    <Content Include="Images\Productos\3.jpg" />
+    <Content Include="Images\Productos\4.jpg" />
+    <Content Include="Images\Productos\5.jpg" />
+    <Content Include="Images\Productos\6.jpg" />
+    <Content Include="Images\Productos\7.jpg" />
+    <Content Include="Images\Productos\8.jpg" />
+    <Content Include="Images\Productos\9.jpg" />
+    <Content Include="Images\Productos\default.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1135,6 +1153,7 @@
     <Content Include="Views\Producto\FiltrarModelos.cshtml" />
     <Content Include="Views\Producto\FiltrarCategorias.cshtml" />
     <Content Include="Views\Producto\FiltrarMarca.cshtml" />
+    <Content Include="Views\Producto\AgregarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

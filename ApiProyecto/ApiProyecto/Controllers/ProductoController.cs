@@ -45,7 +45,8 @@ namespace ApiProyecto.Controllers
                                      ConCategoria = (long)x.ConCategoria,
                                      DescripcionCategoria = x.CATEGORIA.Descripcion,
                                      Precio = x.Precio,
-                                     Stock = x.Stock
+                                     Stock = x.Stock,
+                                     Imagen = x.Imagen
                                  }).FirstOrDefault();
                     return datos;
                 }
@@ -153,7 +154,8 @@ namespace ApiProyecto.Controllers
                         ConCategoria = (long)p.ConCategoria,
                         DescripcionCategoria = p.CATEGORIA.Descripcion, 
                         Precio = p.Precio,
-                        Stock = p.Stock
+                        Stock = p.Stock,
+                        Imagen = p.Imagen
                     })
                     .ToList();
 
@@ -185,7 +187,8 @@ namespace ApiProyecto.Controllers
                         ConCategoria = (long)p.ConCategoria,
                         DescripcionCategoria = p.CATEGORIA.Descripcion,
                         Precio = p.Precio,
-                        Stock = p.Stock
+                        Stock = p.Stock,
+                        Imagen = p.Imagen
                     })
                     .ToList();
 
@@ -210,18 +213,49 @@ namespace ApiProyecto.Controllers
                     {
                         ConProducto = p.ConProducto,
                         Nombre = p.Nombre,
-                        ConModelo = (long)p.ConModelo,
+                        ConModelo = p.ConModelo ?? 0,
                         DescripcionModelo = p.MODELO.Descripcion,
-                        ConMarca = (long)p.ConMarca,
+                        ConMarca = p.ConMarca ?? 0,
                         DescripcionMarca = p.MARCA.Descripcion,
-                        ConCategoria = (long)p.ConCategoria,
+                        ConCategoria = p.ConCategoria ?? 0,
                         DescripcionCategoria = p.CATEGORIA.Descripcion,
                         Precio = p.Precio,
-                        Stock = p.Stock
+                        Stock = p.Stock,
+                        Imagen = p.Imagen
                     })
                     .ToList();
 
                 return productos;
+            }
+        }
+
+        [HttpPost]
+        [Route("AgregarProducto")]
+        public long AgregarProducto(PRODUCTO producto)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+                context.PRODUCTO.Add(producto);
+                context.SaveChanges();
+                return producto.ConProducto;
+            }
+        }
+
+        [HttpPut]
+        [Route("ActualizarRutaImagen")]
+        public string ActualizarRutaImagen(PRODUCTO tProducto)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+                var datos = context.PRODUCTO.FirstOrDefault(x => x.ConProducto == tProducto.ConProducto);
+
+                if (datos != null)
+                {
+                    datos.Imagen = tProducto.Imagen;
+                    context.SaveChanges();
+                }
+
+                return "OK";
             }
         }
 

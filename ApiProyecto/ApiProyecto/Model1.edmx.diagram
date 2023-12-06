@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9cb71faec90c42b8ae955bcab989200d" Name="Diagram1">
+      <Diagram DiagramId="e84361405d554b7aa821264a204aefdb" Name="Diagram1">
         <EntityTypeShape EntityType="ProyectoG7Model.CANTON" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="5.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="5.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoG7Model.PROVINCIA" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />

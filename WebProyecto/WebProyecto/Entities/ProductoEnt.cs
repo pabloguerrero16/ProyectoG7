@@ -17,5 +17,6 @@ namespace WebProyecto.Entities
         public string DescripcionCategoria { get; set; }
         public decimal Precio { get; set; }
         public long Stock { get; set; }
+        public string Imagen { get; set; }
     }
 }

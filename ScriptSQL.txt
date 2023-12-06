@@ -217,57 +217,6 @@ CREATE TABLE PRODUCTO (
 );
 
 
-INSERT INTO MODELO (Descripcion) VALUES ('Golf GTI');
-INSERT INTO MODELO (Descripcion) VALUES ('Jetta');
-INSERT INTO MODELO (Descripcion) VALUES ('Tiguan');
-INSERT INTO MODELO (Descripcion) VALUES ('Passat');
-INSERT INTO MODELO (Descripcion) VALUES ('Beetle');
-INSERT INTO MODELO (Descripcion) VALUES ('Atlas');
-INSERT INTO MODELO (Descripcion) VALUES ('Polo');
-INSERT INTO MODELO (Descripcion) VALUES ('Amarok');
-INSERT INTO MODELO (Descripcion) VALUES ('Arteon');
-INSERT INTO MODELO (Descripcion) VALUES ('Up!');
-
-
-INSERT INTO CATEGORIA (Descripcion) VALUES ('Hatchback');
-INSERT INTO CATEGORIA (Descripcion) VALUES ('Sedán');
-INSERT INTO CATEGORIA (Descripcion) VALUES ('SUV');
-INSERT INTO CATEGORIA (Descripcion) VALUES ('Compacto');
-INSERT INTO CATEGORIA (Descripcion) VALUES ('Pickup');
-
-INSERT INTO MARCA (Descripcion) VALUES ('Volkswagen');
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2010', 1, 1, 1, 20, 30.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2015', 1, 2, 2, 15, 25.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2020', 1, 3, 3, 25, 35.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2018', 1, 4, 2, 18, 28.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2012', 1, 5, 4, 12, 22.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2022', 1, 6, 3, 30, 40.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2022', 1, 7, 1, 22, 26.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2021', 1, 8, 5, 17, 33.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2010', 1, 9, 2, 10, 38.000);
-
-INSERT INTO PRODUCTO (Nombre, ConMarca, ConModelo, ConCategoria, Stock, Precio)
-VALUES ('2014', 1, 10, 4, 14, 20.000);
-
-
 
 USE ProyectoG7
 GO
@@ -280,3 +229,81 @@ BEGIN
 	INNER JOIN MARCA a ON P.ConMarca = a.ConMarca
 	INNER JOIN CATEGORIA c ON P.ConCategoria = c.ConCategoria
 END
+
+-- Agrega una columna llamada [Imagen] a la tabla PRODUCTO
+ALTER TABLE PRODUCTO
+ADD [Imagen] [varchar](250) NOT NULL DEFAULT '~/Images/Productos/default.jpg';
+
+USE [ProyectoG7]
+GO
+/****** Object:  StoredProcedure [dbo].[ConsultarProductos]    Script Date: 5/12/2023 22:56:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[ConsultarProductos]
+AS
+BEGIN
+	SELECT ConProducto, Nombre, m.Descripcion 'DescripcionModelo', a.Descripcion 'DescripcionMarca', c.Descripcion 'DescripcionCategoria', Precio, Stock, Imagen
+	FROM PRODUCTO P
+	INNER JOIN MODELO m ON P.ConModelo = m.ConModelo
+	INNER JOIN MARCA a ON P.ConMarca = a.ConMarca
+	INNER JOIN CATEGORIA c ON P.ConCategoria = c.ConCategoria
+END
+
+DELETE FROM PRODUCTO;
+DELETE FROM CATEGORIA;
+DELETE FROM MARCA;
+DELETE FROM MODELO;
+
+DBCC CHECKIDENT('PRODUCTO', RESEED, 0);
+DBCC CHECKIDENT('CATEGORIA', RESEED, 0);
+DBCC CHECKIDENT('MODELO', RESEED, 0);
+DBCC CHECKIDENT('MARCA', RESEED, 0);
+
+INSERT INTO MARCA (Descripcion) VALUES
+('Volkswagen'),
+('Audi'),
+('Lamborghini');
+
+INSERT INTO CATEGORIA (Descripcion) VALUES
+('Compacto'),
+('Deportivo'),
+('Sedán'),
+('SUV'),
+('Type 1');
+
+INSERT INTO MODELO (Descripcion) VALUES
+('Golf GTI'),
+('Jetta'),
+('A3'),
+('A4'),
+('Huracan'),
+('Aventador'),
+('Type 1');
+
+-- Volkswagen
+INSERT INTO PRODUCTO (ConModelo, ConMarca, ConCategoria, Precio, Nombre, Imagen, Stock)
+VALUES
+(7, 1, 5, 12000.00, '1965', '~/Images/Productos/16.jpg', 30),
+(7, 1, 5, 15000.00, '1970', '~/Images/Productos/17.jpg', 20),
+(1, 1, 1, 30000.00, '2010', '~/Images/Productos/1.jpg', 50),
+(2, 1, 3, 25000.00, '2015', '~/Images/Productos/2.jpg', 50),
+(1, 1, 2, 35000.00, '2012', '~/Images/Productos/3.jpg', 50),
+-- Audi
+(3, 2, 1, 40000.00, '2018', '~/Images/Productos/4.jpg', 50),
+(4, 2, 3, 32000.00, '2016', '~/Images/Productos/5.jpg', 50),
+-- Lamborghini
+(5, 3, 2, 50000.00, '2020', '~/Images/Productos/6.jpg', 50),
+(6, 3, 1, 60000.00, '2019', '~/Images/Productos/7.jpg', 50),
+-- Otros
+(2, 1, 4, 28000.00, '2014', '~/Images/Productos/8.jpg', 50),
+(3, 2, 2, 45000.00, '2017', '~/Images/Productos/9.jpg', 50),
+(6, 3, 3, 55000.00, '2022', '~/Images/Productos/10.jpg', 50),
+(4, 2, 4, 34000.00, '2013', '~/Images/Productos/11.jpg', 50),
+(5, 3, 1, 48000.00, '2016', '~/Images/Productos/12.jpg', 50),
+(1, 1, 3, 32000.00, '2011', '~/Images/Productos/13.jpg', 50),
+(2, 1, 2, 38000.00, '2013', '~/Images/Productos/14.jpg', 50),
+(3, 2, 1, 42000.00, '2015', '~/Images/Productos/15.jpg', 50);
+
+

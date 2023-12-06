@@ -104,6 +104,28 @@ namespace WebProyecto.Models
             }
         }
 
+        public long AgregarProducto(ProductoEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "AgregarProducto";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PostAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<long>().Result;
+            }
+        }
+
+        public string ActualizarRutaImagen(ProductoEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarRutaImagen";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
 
 
     }
