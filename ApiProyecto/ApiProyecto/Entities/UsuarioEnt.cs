@@ -19,5 +19,6 @@ namespace ApiProyecto.Entities
         public long ConCanton {  get; set; }
         public string DescripcionCanton {  get; set; }
         public long ConRol { get; set; }
+        public string Imagen { get; set; }
     }
 }

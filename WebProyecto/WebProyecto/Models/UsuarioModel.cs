@@ -98,5 +98,17 @@ namespace WebProyecto.Models
                 return resp.Content.ReadFromJsonAsync<string>().Result;
             }
         }
+
+        public string ActualizarRutaImagenUsuario(UsuarioEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarRutaImagenUsuario";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
     }
 }
