@@ -9,7 +9,7 @@ using WebProyecto.Models;
 
 namespace WebProyecto.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
 
         UsuarioModel usuarioModel = new UsuarioModel();

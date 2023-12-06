@@ -8,7 +8,7 @@ using WebProyecto.Models;
 
 namespace WebProyecto.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : BaseController
     {
         UsuarioModel  usuarioModel = new UsuarioModel();
         [HttpGet]

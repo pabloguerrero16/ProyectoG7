@@ -162,6 +162,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="template\css\style.css" />
+    <Content Include="template\css\extra.css" />
     <Content Include="template\images\auth\lockscreen-bg.jpg" />
     <Content Include="template\images\auth\login-bg.jpg" />
     <Content Include="template\images\auth\Login_bg.jpg" />
@@ -1129,9 +1131,14 @@
     <Content Include="Views\Usuario\PerfilUsuario.cshtml" />
     <Content Include="Views\Producto\ConsultarProductos.cshtml" />
     <Content Include="Views\Producto\ListarProductos.cshtml" />
+    <Content Include="Views\Producto\DetalleProducto.cshtml" />
+    <Content Include="Views\Producto\FiltrarModelos.cshtml" />
+    <Content Include="Views\Producto\FiltrarCategorias.cshtml" />
+    <Content Include="Views\Producto\FiltrarMarca.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

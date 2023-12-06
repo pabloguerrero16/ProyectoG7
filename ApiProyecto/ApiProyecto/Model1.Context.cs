@@ -28,13 +28,31 @@ namespace ApiProyecto
         }
     
         public virtual DbSet<CANTON> CANTON { get; set; }
-        public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<CATEGORIA> CATEGORIA { get; set; }
         public virtual DbSet<MARCA> MARCA { get; set; }
         public virtual DbSet<MODELO> MODELO { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
+        public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<USUARIO> USUARIO { get; set; }
+    
+        public virtual ObjectResult<ConsultarProductos_Result> ConsultarProductos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProductos_Result>("ConsultarProductos");
+        }
+    
+        public virtual ObjectResult<IniciarSesion_Result> IniciarSesion(string correo, string contrasenna)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contrasennaParameter = contrasenna != null ?
+                new ObjectParameter("Contrasenna", contrasenna) :
+                new ObjectParameter("Contrasenna", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesion_Result>("IniciarSesion", correoParameter, contrasennaParameter);
+        }
     
         public virtual int RegistrarCuenta(string cedula, string nombre, string correo, string contrasenna)
         {
@@ -55,24 +73,6 @@ namespace ApiProyecto
                 new ObjectParameter("Contrasenna", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarCuenta", cedulaParameter, nombreParameter, correoParameter, contrasennaParameter);
-        }
-    
-        public virtual ObjectResult<IniciarSesion_Result> IniciarSesion(string correo, string contrasenna)
-        {
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
-    
-            var contrasennaParameter = contrasenna != null ?
-                new ObjectParameter("Contrasenna", contrasenna) :
-                new ObjectParameter("Contrasenna", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesion_Result>("IniciarSesion", correoParameter, contrasennaParameter);
-        }
-    
-        public virtual ObjectResult<ConsultarProductos_Result> ConsultarProductos()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarProductos_Result>("ConsultarProductos");
         }
     }
 }

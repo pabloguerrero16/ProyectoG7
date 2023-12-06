@@ -9,40 +9,72 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Productos Registrados</h4>
-
-            <div class="table-responsive">
-                <table class="table table-dark">
-                    <thead>
-                        <tr>
-                            <th style="color: white"> Código </th>
-                            <th style="color: white"> Descripción </th>
-                            <th style="color: white"> Modelo </th>
-                            <th style="color: white"> Marca </th>
-                            <th style="color: white"> Tipo </th>
-                            <th style="color: white"> Precio </th>
-                            <th style="color: white"> Stock </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model)
-                        {
+            <br>
+            @if (Model.Count() > 0)
+            {
+                <div class="table-responsive">
+                    <table id="tableData" class="table table-dark">
+                        <thead>
                             <tr>
-                                <td style="color: white"> @item.ConProducto </td>
-                                <td style="color: white"> @item.Nombre </td>
-                                <td style="color: white"> @item.DescripcionModelo </td>
-                                <td style="color: white"> @item.DescripcionMarca </td>
-                                <td style="color: white"> @item.DescripcionCategoria </td>
-                                <td style="color: white"> @item.Precio </td>
-                                <td style="color: white"> @item.Stock </td>
-
+                                <th style="color: white"> Código </th>
+                                <th style="color: white"> Descripción </th>
+                                <th style="color: white"> Modelo </th>
+                                <th style="color: white"> Marca </th>
+                                <th style="color: white"> Tipo </th>
+                                <th style="color: white"> Precio </th>
+                                <th style="color: white"> Stock </th>
                             </tr>
-                        }
-                        
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="color: white"> @item.ConProducto </td>
+                                    <td style="color: white"> @item.Nombre </td>
+                                    <td style="color: white"> @item.DescripcionModelo </td>
+                                    <td style="color: white"> @item.DescripcionMarca </td>
+                                    <td style="color: white"> @item.DescripcionCategoria </td>
+                                    <td style="color: white"> @item.Precio </td>
+                                    <td style="color: white"> @item.Stock </td>
+
+                                </tr>
+                            }
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else 
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Error</h5>
+                        <div class="row">
+                            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                    <h2 class="mb-0">No hay ningún vehículo registrado</h2>
+                                </div>
+                                <h6 class="text-muted font-weight-normal"></h6>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                                <i class="icon-lg mdi mdi-close-box-outline text-primary ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+       
+            
         </div>
     </div>
 </div>
+
+
 
