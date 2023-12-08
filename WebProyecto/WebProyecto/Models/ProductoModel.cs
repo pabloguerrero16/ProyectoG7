@@ -126,6 +126,17 @@ namespace WebProyecto.Models
             }
         }
 
+        public string ActualizarProducto(ProductoEnt ent)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ActualizarProducto";
+                var jsonData = JsonContent.Create(ent);
+                var res = client.PutAsync(url, jsonData).Result;
+                return res.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
 
 
     }

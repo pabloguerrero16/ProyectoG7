@@ -88,6 +88,41 @@ namespace WebProyecto.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ActualizarProducto(long q)
+        {
+            var datos = productoModel.DetalleProducto(q);
+            return View(datos);
+        }
+
+        [HttpPost]
+        public ActionResult ActualizarProducto(HttpPostedFileBase ImgProducto, ProductoEnt entidad)
+        {
+            string respuesta = productoModel.ActualizarProducto(entidad);
+
+            if(respuesta == "OK")
+            {
+                if (ImgProducto != null)
+                {
+                    string extension = Path.GetExtension(Path.GetFileName(ImgProducto.FileName));
+                    string ruta = AppDomain.CurrentDomain.BaseDirectory +"Images/Productos\\" + entidad.ConProducto + extension;
+                    ImgProducto.SaveAs(ruta);
+
+                    entidad.Imagen = "/Images/Productos/" + entidad.ConProducto + extension;
+                    entidad.ConProducto = entidad.ConProducto;
+
+                    productoModel.ActualizarRutaImagen(entidad);
+                }
+
+                return RedirectToAction("ConsultarProductos", "Producto");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se ha podido actualizar la información del producto";
+                return View();
+            }
+        }
+
 
 
     }

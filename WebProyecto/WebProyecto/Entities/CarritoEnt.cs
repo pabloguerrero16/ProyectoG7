@@ -12,8 +12,7 @@ namespace WebProyecto.Entities
         public long ConProducto { get; set; }
         public int Cantidad { get; set; }
         public DateTime FechaCarrito { get; set; }
-
-        public int Precio { get; set; }
+        public decimal Precio { get; set; }
 
     } 
 }

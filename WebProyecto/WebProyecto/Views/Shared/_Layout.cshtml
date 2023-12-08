@@ -184,10 +184,21 @@
                             <span class="mdi mdi-menu"></span>
                         </button>
 
-                        <div style="margin-left:2%">
-                            <i class="fa fa-tag"></i> @Session["Cant"].ToString() &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-dollar"></i> @Session["Subt"].ToString()
-                        </div>
+                        @if (Session["ConUsuario"] != null)
+                        {
+                            <div style="margin-left:2%; margin-top: 20px;">
+                                <i class="mdi mdi-tag-outline"></i> @Session["Cant"].ToString()
+                            </div>
+                            <br />
+                            <div style="margin-left: 2%; margin-top: 20px;">
+                                <i class="mdi mdi-coin"></i>@Session["Subt"].ToString()
+                            </div>
+                            <br />
+                            <div style="margin-left: 2%; margin-top: 20px;">
+                                <a href="@Url.Action("IniciarSesion","Login")" class="btn btn-outline-secondary btn-block enter-btn" style="">Ver Carrito</a>
+                            </div>
+                        }
+
 
 
 
@@ -200,7 +211,17 @@
 
                                         @if (Session["ConUsuario"] != null)
                                         {
-                                            <img class="img-xs rounded-circle" src="~/template/images/faces/face15.jpg" alt="">
+                                            var imagenPath = Session["Imagen"]?.ToString();
+                                            if (imagenPath != null)
+                                            {
+                                                <img class="img-xs rounded-circle" src="@Url.Content(imagenPath)" alt="Imagen">
+                                            }
+                                            else
+                                            {
+                                                <img class="img-xs rounded-circle" src="~/Images/Users/default.jpg" alt="Imagen">
+                                            }
+
+
                                             <p class="mb-0 d-none d-sm-block navbar-profile-name">@Session["Nombre"]</p>
                                             <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                         }
@@ -286,11 +307,13 @@
         <!-- container-scroller -->
         <!-- plugins:js -->
         <script src="~/template/vendors/js/vendor.bundle.base.js"></script>
+
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <!-- End plugin js for this page -->
         <!-- inject:js -->
         <script src="~/template/js/off-canvas.js"></script>
+        <script>var loginUrl = '@Url.Action("Index", "Login")';</script>
         <script src="~/template/js/hoverable-collapse.js"></script>
         <script src="~/template/js/misc.js"></script>
         <script src="~/template/js/settings.js"></script>
@@ -299,7 +322,7 @@
         <!-- endinject -->
         <!-- Custom js for this page -->
         <!-- End custom js for this page -->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script> 
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 

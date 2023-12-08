@@ -93,7 +93,6 @@ namespace ApiProyecto.Controllers
                         datos.Identificacion = ent.Identificacion;
                         datos.ConProvincia = ent.ConProvincia;
                         datos.ConCanton = ent.ConCanton;
-                        datos.Imagen = ent.Imagen;
                         context.SaveChanges();
                     }
 
@@ -166,7 +165,7 @@ namespace ApiProyecto.Controllers
         {
             using (var context = new ProyectoG7Entities())
             {
-                var datos = context.USUARIO.FirstOrDefault(x => x.Imagen == ent.Imagen);
+                var datos = context.USUARIO.FirstOrDefault(x => x.ConUsuario == ent.ConUsuario);
 
                 if (datos != null)
                 {

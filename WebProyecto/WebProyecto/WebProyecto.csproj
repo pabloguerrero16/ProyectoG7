@@ -217,6 +217,11 @@
     <Content Include="Images\Productos\8.jpg" />
     <Content Include="Images\Productos\9.jpg" />
     <Content Include="Images\Productos\default.jpg" />
+    <Content Include="Images\Users\117950010.jpg" />
+    <Content Include="Images\Users\117950123.jpg" />
+    <Content Include="Images\Users\123.jpg" />
+    <Content Include="Images\Users\305340889.jpg" />
+    <Content Include="Images\Users\default.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1157,6 +1162,7 @@
     <Content Include="Views\Producto\FiltrarCategorias.cshtml" />
     <Content Include="Views\Producto\FiltrarMarca.cshtml" />
     <Content Include="Views\Producto\AgregarProducto.cshtml" />
+    <Content Include="Views\Producto\ActualizarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

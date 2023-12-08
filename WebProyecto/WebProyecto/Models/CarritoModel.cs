@@ -13,11 +13,11 @@ namespace WebProyecto.Models
 
         readonly string urlApi = "https://localhost:44327/";
 
-        public string AgregarCarrito(CarritoEnt entidad)
+        public string RegistrarCarrito(CarritoEnt entidad)
         {
             using (var client = new HttpClient())
             {
-                string url = urlApi + "AgregarCarrito";
+                string url = urlApi + "RegistrarCarrito";
                 JsonContent contenido = JsonContent.Create(entidad);
                 var resp = client.PostAsync(url, contenido).Result;
                 return resp.Content.ReadFromJsonAsync<string>().Result;

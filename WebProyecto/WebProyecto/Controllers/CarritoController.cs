@@ -4,13 +4,14 @@ using System;
 using WebProyecto.Entities;
 using WebProyecto.Models;
 using System.Linq;
+using WebProyecto.Controllers;
 
-public class CarritoController : Controller
+public class CarritoController : BaseController
 {
     CarritoModel carritoModel = new CarritoModel();
 
     [HttpPost]
-    public ActionResult AgregarCarrito(long conProducto, int cantidad)
+    public ActionResult RegistrarCarrito(long conProducto, int cantidad)
     {
         CarritoEnt entidad = new CarritoEnt();
         entidad.ConUsuario = long.Parse(Session["ConUsuario"].ToString());
@@ -18,7 +19,7 @@ public class CarritoController : Controller
         entidad.Cantidad = cantidad;
         entidad.FechaCarrito = DateTime.Now;
 
-        carritoModel.AgregarCarrito(entidad);
+        carritoModel.RegistrarCarrito(entidad);
 
         var datos = carritoModel.ConsultarCarrito(long.Parse(Session["ConUsuario"].ToString()));
         Session["Cant"] = datos.Sum(x => x.Cantidad);

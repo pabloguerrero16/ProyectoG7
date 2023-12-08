@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,12 +31,27 @@ namespace WebProyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult PerfilUsuario(UsuarioEnt ent)
+        public ActionResult PerfilUsuario(HttpPostedFileBase ImgUsuario, UsuarioEnt ent)
         {
+            
+            
+            
             var resp = usuarioModel.ActualizarCuenta(ent);
             if(resp == "OK")
             {
+                if (ImgUsuario != null)
+                {
+                    string extension = Path.GetExtension(Path.GetFileName(ImgUsuario.FileName));
+                    string ruta = AppDomain.CurrentDomain.BaseDirectory + "Images/Users\\" + ent.Identificacion + extension;
+                    ImgUsuario.SaveAs(ruta);
+
+                    ent.Imagen = "/Images/Users/" + ent.Identificacion + extension;
+                    ent.ConUsuario = ent.ConUsuario;
+
+                    usuarioModel.ActualizarRutaImagenUsuario(ent);
+                } 
                 Session["Nombre"] = ent.Nombre;
+                Session["Imagen"] = ent.Imagen;
                 return RedirectToAction("Index", "Login");
             }
             else
@@ -74,12 +90,24 @@ namespace WebProyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult ActualizarCuenta(UsuarioEnt ent)
+        public ActionResult ActualizarCuenta(HttpPostedFileBase ImgUsuario ,UsuarioEnt ent)
         {
             var resp = usuarioModel.ActualizarCuenta(ent);
 
             if (resp == "OK")
             {
+                if (ImgUsuario != null)
+                {
+                    string extension = Path.GetExtension(Path.GetFileName(ImgUsuario.FileName));
+                    string ruta = AppDomain.CurrentDomain.BaseDirectory + "~/Images/Users\\" + ent.Identificacion + extension;
+                    ImgUsuario.SaveAs(ruta);
+
+                    ent.Imagen = "~/Images/Users/" + ent.Identificacion + extension;
+                    ent.ConUsuario = ent.ConUsuario;
+
+                    usuarioModel.ActualizarRutaImagenUsuario(ent);
+                }
+
                 return RedirectToAction("ConsultaUsuarios", "Usuario");
             }
             else

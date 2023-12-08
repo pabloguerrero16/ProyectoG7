@@ -27,11 +27,12 @@
                     @if (Session["ConUsuario"] != null)
                     {
                         <div class="input-group">
-                            <input type="number" class="form-control" min="1" max="@Model.Stock" style="width: 100px;">
+                            <input type="number" class="form-control" id=prd-@Model.ConProducto min="1" max="@Model.Stock" style="width: 100px;">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" onclick="AgregarCarrito(@Model.ConProducto)" type="button">
-                                    <i class="fa fa-cart-plus"></i> Agregar al Carrito
-                                </button>
+                                <a class="btn btn-primary" onclick="AgregarCarrito(@Model.ConProducto)">
+                                    Agregar al Carrito
+                                </a>
+                                   
                             </div>
                         </div>
                     }
@@ -67,6 +68,10 @@
                                     <td>Precio</td>
                                     <td>$@Model.Precio</td>
                                 </tr>
+                                <tr>
+                                    <td>Unidades en Inventario</td>
+                                    <td>@Model.Stock</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -77,19 +82,6 @@
 </div>
 
 <script>
-    function AgregarCarrito(conProducto) {
-        let cantidad = $("#prd-" + conProducto).val();
-        $.ajax({
-            url: '/Carrito/AgregarCarrito',
-            type: "POST",
-            data: {
-                "conProducto": conProducto,
-                "cantidad": cantidad
-            },
-            success: function (data) {
-                window.location.href = '@Url.Action("Login","IniciarSesion")';
-            }
-        });
-    }
+    var loginUrl = '@Url.Action("Index", "Login")';
 </script>
 

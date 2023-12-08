@@ -259,6 +259,29 @@ namespace ApiProyecto.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("ActualizarProducto")]
+        public string ActualizarProducto(PRODUCTO producto)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+                try
+                {
+                    var datos = context.PRODUCTO.Where(x => x.ConProducto == producto.ConProducto).FirstOrDefault();
+                    datos.Nombre = producto.Nombre;
+                    datos.ConModelo = producto.ConModelo;
+                    datos.ConMarca = producto.ConMarca;
+                    datos.ConCategoria = producto.ConCategoria;
+                    datos.Precio = producto.Precio;
+                    datos.Stock = producto.Stock;
+                    context.SaveChanges();
+                    return "OK";
+                } catch (Exception) {
+                    return string.Empty;
+                }
+            }
+        }
+
 
     }
 }

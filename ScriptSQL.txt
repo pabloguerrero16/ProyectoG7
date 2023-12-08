@@ -216,20 +216,6 @@ CREATE TABLE PRODUCTO (
     Stock BIGINT NOT NULL
 );
 
-
-
-USE ProyectoG7
-GO
-CREATE PROCEDURE ConsultarProductos
-AS
-BEGIN
-	SELECT ConProducto, Nombre, m.Descripcion 'DescripcionModelo', a.Descripcion 'DescripcionMarca', c.Descripcion 'DescripcionCategoria', Precio, Stock
-	FROM PRODUCTO P
-	INNER JOIN MODELO m ON P.ConModelo = m.ConModelo
-	INNER JOIN MARCA a ON P.ConMarca = a.ConMarca
-	INNER JOIN CATEGORIA c ON P.ConCategoria = c.ConCategoria
-END
-
 -- Agrega una columna llamada [Imagen] a la tabla PRODUCTO
 ALTER TABLE PRODUCTO
 ADD [Imagen] [varchar](250) NOT NULL DEFAULT '~/Images/Productos/default.jpg';
@@ -306,4 +292,99 @@ VALUES
 (2, 1, 2, 38000.00, '2013', '~/Images/Productos/14.jpg', 50),
 (3, 2, 1, 42000.00, '2015', '~/Images/Productos/15.jpg', 50);
 
+USE [ProyectoG7]
+GO
+/****** Object:  Table [dbo].[CARRITO]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CARRITO](
+	[ConCarrito] [bigint] NOT NULL,
+	[ConUsuario] [bigint] NOT NULL,
+	[ConProducto] [bigint] NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[FechaCarrito] [datetime] NOT NULL,
+ CONSTRAINT [PK_CARRITO] PRIMARY KEY CLUSTERED 
+(
+	[ConCarrito] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DETALLE]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DETALLE](
+	[ConDetalle] [bigint] NOT NULL,
+	[ConMaestro] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConProducto] [bigint] NOT NULL,
+	[CantidadCompra] [int] NOT NULL,
+	[PrecioCompra] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_DETALLE] PRIMARY KEY CLUSTERED 
+(
+	[ConDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO](
+	[ConMaestro] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConUsuario] [bigint] NOT NULL,
+	[TotalFactura] [decimal](18, 2) NOT NULL,
+	[FechaCompra] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_MAESTRO] PRIMARY KEY CLUSTERED 
+(
+	[ConMaestro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_CARRITO] FOREIGN KEY([ConUsuario])
+REFERENCES [dbo].[USUARIO] ([ConUsuario])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_CARRITO]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_PRODUCTO] FOREIGN KEY([ConProducto])
+REFERENCES [dbo].[PRODUCTO] ([ConProducto])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_PRODUCTO]
+GO
+ALTER TABLE [dbo].[DETALLE]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_MAESTRO] FOREIGN KEY([ConMaestro])
+REFERENCES [dbo].[MAESTRO] ([ConMaestro])
+GO
+ALTER TABLE [dbo].[DETALLE] CHECK CONSTRAINT [FK_DETALLE_MAESTRO]
+GO
+ALTER TABLE [dbo].[DETALLE]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_PRODUCTO] FOREIGN KEY([ConProducto])
+REFERENCES [dbo].[PRODUCTO] ([ConProducto])
+GO
+ALTER TABLE [dbo].[DETALLE] CHECK CONSTRAINT [FK_DETALLE_PRODUCTO]
+GO
+ALTER TABLE [dbo].[MAESTRO]  WITH CHECK ADD  CONSTRAINT [FK_MAESTRO_USUARIO] FOREIGN KEY([ConUsuario])
+REFERENCES [dbo].[USUARIO] ([ConUsuario])
+GO
+ALTER TABLE [dbo].[MAESTRO] CHECK CONSTRAINT [FK_MAESTRO_USUARIO]
+GO
 
+
+-- Agrega una columna llamada [Imagen] a la tabla USUARIO
+ALTER TABLE USUARIO
+ADD [Imagen] [varchar](250) NOT NULL DEFAULT '~/Images/Users/default.jpg';
+
+ALTER PROCEDURE [dbo].[IniciarSesion]
+	@Correo varchar(100),
+	@Contrasenna varchar(20)
+AS
+BEGIN
+	SELECT ConUsuario, Identificacion, U.Nombre, Correo, Contrasenna, U.Imagen, R.Descripcion 'DescripcionRol', P.Nombre 'DescripcionProvincia', C.Nombre 'DescripcionCanton'
+	FROM USUARIO U
+	INNER JOIN Rol R ON U.ConRol = R.ConRol
+	INNER JOIN PROVINCIA P ON U.ConProvincia = P.ConProvincia
+	INNER JOIN CANTON C ON U.ConCanton = C.ConCanton
+	WHERE Correo = @Correo
+	AND Contrasenna = @Contrasenna
+END

@@ -28,6 +28,7 @@
                                 <th style="color: white"> Precio </th>
                                 <th style="color: white"> Stock </th>
                                 <th style="color: white"> Imagen </th>
+                                <th style="color: white"> Editar </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,6 +44,7 @@
                                     <td style="color: white"> @item.Precio </td>
                                     <td style="color: white"> @item.Stock </td>
                                     <td style="text-align:center"><img src="@Url.Content(item.Imagen)" style="width:150px; height:100px; border-radius:0px"></td>
+                                    <td style="text-align:center"><a href="@Url.Action("ActualizarProducto", "Producto", new { q = item.ConProducto })" class="btn btn-inverse-primary btn-fw">Editar</a></td>
 
                                 </tr>
                             }

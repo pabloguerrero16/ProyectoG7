@@ -28,16 +28,16 @@ namespace ApiProyecto
         }
     
         public virtual DbSet<CANTON> CANTON { get; set; }
+        public virtual DbSet<CARRITO> CARRITO { get; set; }
         public virtual DbSet<CATEGORIA> CATEGORIA { get; set; }
+        public virtual DbSet<DETALLE> DETALLE { get; set; }
+        public virtual DbSet<MAESTRO> MAESTRO { get; set; }
         public virtual DbSet<MARCA> MARCA { get; set; }
         public virtual DbSet<MODELO> MODELO { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTO { get; set; }
         public virtual DbSet<PROVINCIA> PROVINCIA { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
-        public virtual DbSet<CARRITO> CARRITO { get; set; }
-        public virtual DbSet<DETALLE> DETALLE { get; set; }
-        public virtual DbSet<MAESTRO> MAESTRO { get; set; }
     
         public virtual ObjectResult<ConsultarProductos_Result> ConsultarProductos()
         {

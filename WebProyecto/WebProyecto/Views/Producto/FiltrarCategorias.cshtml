@@ -44,10 +44,6 @@
                     <h4 class="preview-subject" style="margin-bottom: 20px">$@item.Precio</h4>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="@Url.Action("DetalleProducto","Producto", new {q = item.ConProducto})" class="btn btn-primary btn-rounded btn-fw" style="font-size: 15px; padding: 10px 20px;">Ver</a>
-                        @if (Session["ConUsuario"] != null)
-                        {
-                            <button type="button" class="btn btn-secondary btn-rounded btn-fw" style="font-size: 15px; padding: 10px 20px;">Agregar al Carrito</button>
-                        }
                     </div>
                 </div>
             </div>

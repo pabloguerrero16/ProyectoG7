@@ -4,30 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d0dc8d21a689487db1d3882be005d89d" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="ProyectoG7Model.CANTON" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="5.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.PROVINCIA" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.Rol" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.USUARIO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="ProyectoG7Model.FK__CANTON__IdProvin__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConCant__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConCat__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMar__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMod__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConProv__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConRol__5070F446" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ProyectoG7Model.CARRITO" Width="1.5" PointX="10.25" PointY="1.125" />
-        <EntityTypeShape EntityType="ProyectoG7Model.DETALLE" Width="1.5" PointX="10.25" PointY="4.5" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MAESTRO" Width="1.5" PointX="7.5" PointY="1.75" />
-        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_CARRITO" />
-        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_PRODUCTO" />
-        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_MAESTRO" />
-        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_PRODUCTO" />
-        <AssociationConnector Association="ProyectoG7Model.FK_MAESTRO_USUARIO" />
+      <Diagram DiagramId="96613e13fb01424195234d401426760e" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoG7Model.CANTON" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CARRITO" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.DETALLE" Width="1.5" PointX="9.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MAESTRO" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.PROVINCIA" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.Rol" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.USUARIO" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoG7Model.FK__CANTON__IdProvin__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConCant__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_CARRITO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_MAESTRO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK_MAESTRO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConProv__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConRol__3E52440B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

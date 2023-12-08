@@ -11,14 +11,30 @@ namespace ApiProyecto.Controllers
     public class CarritoController : ApiController
     {
         [HttpPost]
-        [Route("AgregarCarrito")]
-        public string AgregarProducto(CARRITO carrito)
+        [Route("RegistrarCarrito")]
+        public string RegistrarCarrito(CARRITO carrito)
         {
             using (var context = new ProyectoG7Entities())
             {
-                context.CARRITO.Add(carrito);
-                context.SaveChanges();
-                return"OK";
+
+                var datos = (from x in context.CARRITO
+                             where x.ConUsuario == carrito.ConUsuario
+                             && x.ConProducto == carrito.ConProducto
+                             select x).FirstOrDefault();
+
+                if (datos == null)
+                {
+                    context.CARRITO.Add(carrito);
+                    context.SaveChanges();
+                    
+                }
+                else
+                {
+                    datos.Cantidad = carrito.Cantidad;
+                    context.SaveChanges();
+                }
+
+                return "OK";
             }
         }
 
@@ -29,10 +45,9 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-
-                return (from x in context.CARRITO
-                        join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
-                        where x.ConProducto == q
+                return  (from x in context.CARRITO
+                        join y in context.PRODUCTO on x.ConProducto equals  y.ConProducto
+                        where x.ConUsuario == q
                         select new
                         {
                             x.ConProducto,
@@ -41,7 +56,7 @@ namespace ApiProyecto.Controllers
                             x.Cantidad,
                             x.FechaCarrito,
                             y.Precio
-                        }).ToList();
+                        } ).ToList();
             }
         }
     }

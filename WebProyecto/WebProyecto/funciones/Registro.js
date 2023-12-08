@@ -88,3 +88,22 @@ function validarCorreo() {
         return false;
     } 
 }
+
+//FUNCIÓN PARA AGREGAR CARRITO
+function AgregarCarrito(conProducto) {
+
+    let cantidad = $("#prd-" + conProducto).val();
+
+    $.ajax({
+        url: "/Carrito/RegistrarCarrito",
+        type: "POST",
+        data: {
+            "conProducto": conProducto,
+            "cantidad": cantidad
+        },
+        success: function (data) {
+            window.location.href = loginUrl;
+        }
+    });
+
+}

@@ -32,11 +32,11 @@ namespace ApiProyecto
         public string Imagen { get; set; }
     
         public virtual CANTON CANTON { get; set; }
-        public virtual PROVINCIA PROVINCIA { get; set; }
-        public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CARRITO> CARRITO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MAESTRO> MAESTRO { get; set; }
+        public virtual PROVINCIA PROVINCIA { get; set; }
+        public virtual Rol Rol { get; set; }
     }
 }
