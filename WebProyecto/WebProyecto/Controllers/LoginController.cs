@@ -13,6 +13,7 @@ namespace WebProyecto.Controllers
     {
 
         UsuarioModel usuarioModel = new UsuarioModel();
+        CarritoModel carritoModel = new CarritoModel();
 
         [HttpGet]
         public ActionResult Index()
@@ -44,6 +45,11 @@ namespace WebProyecto.Controllers
                 Session["ConUsuario"] = resp.ConUsuario;
                 Session["Nombre"] = resp.Nombre;
                 Session["Rol"] = resp.DescripcionRol;
+
+                var datos = carritoModel.ConsultarCarrito(resp.ConUsuario);
+                Session["Cant"] = datos.Sum(x => x.Cantidad);
+                Session["Subt"] = datos.Sum(x=>x.Precio);
+
                 return RedirectToAction("Index", "Login");
             }
             else

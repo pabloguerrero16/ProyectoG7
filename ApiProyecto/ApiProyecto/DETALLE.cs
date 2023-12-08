@@ -10,16 +10,17 @@
 namespace ApiProyecto
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class ConsultarProductos_Result
+    public partial class DETALLE
     {
+        public long ConDetalle { get; set; }
+        public long ConMaestro { get; set; }
         public long ConProducto { get; set; }
-        public string Nombre { get; set; }
-        public string DescripcionModelo { get; set; }
-        public string DescripcionMarca { get; set; }
-        public string DescripcionCategoria { get; set; }
-        public decimal Precio { get; set; }
-        public long Stock { get; set; }
-        public string Imagen { get; set; }
+        public int CantidadCompra { get; set; }
+        public decimal PrecioCompra { get; set; }
+    
+        public virtual MAESTRO MAESTRO { get; set; }
+        public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

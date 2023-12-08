@@ -12,30 +12,21 @@ namespace ApiProyecto
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUCTO
+    public partial class MAESTRO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRODUCTO()
+        public MAESTRO()
         {
-            this.CARRITO = new HashSet<CARRITO>();
             this.DETALLE = new HashSet<DETALLE>();
         }
     
-        public long ConProducto { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<long> ConModelo { get; set; }
-        public Nullable<long> ConMarca { get; set; }
-        public Nullable<long> ConCategoria { get; set; }
-        public decimal Precio { get; set; }
-        public long Stock { get; set; }
-        public string Imagen { get; set; }
+        public long ConMaestro { get; set; }
+        public long ConUsuario { get; set; }
+        public decimal TotalFactura { get; set; }
+        public string FechaCompra { get; set; }
     
-        public virtual CATEGORIA CATEGORIA { get; set; }
-        public virtual MARCA MARCA { get; set; }
-        public virtual MODELO MODELO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRITO> CARRITO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE> DETALLE { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }
