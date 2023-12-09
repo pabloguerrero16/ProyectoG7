@@ -26,7 +26,7 @@ namespace ApiProyecto.Controllers
                 {
                     context.CARRITO.Add(carrito);
                     context.SaveChanges();
-                    
+
                 }
                 else
                 {
@@ -45,8 +45,8 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return  (from x in context.CARRITO
-                        join y in context.PRODUCTO on x.ConProducto equals  y.ConProducto
+                return (from x in context.CARRITO
+                        join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
                         where x.ConUsuario == q
                         select new
                         {
@@ -55,9 +55,26 @@ namespace ApiProyecto.Controllers
                             x.ConUsuario,
                             x.Cantidad,
                             x.FechaCarrito,
-                            y.Precio
-                        } ).ToList();
+                            y.Precio,
+                            y.Nombre,
+                            subTotal = y.Precio * x.Cantidad,
+                            Impuesto = (y.Precio * x.Cantidad) * 0.13M,
+                            Total = (y.Precio * x.Cantidad) + (y.Precio * x.Cantidad) * 0.13M
+                        }).ToList();
+            }
+        }
+        [HttpPost]
+        [Route("PagarCarrito")]
+        public string PagarCarrito(CARRITO carrito)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+
+                context.PagarCarrito_SP(CARRITO.ConUsuario);
+
+                return "OK";
             }
         }
     }
 }
+

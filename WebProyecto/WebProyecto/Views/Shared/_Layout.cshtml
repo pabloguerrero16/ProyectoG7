@@ -166,7 +166,18 @@
                             </a>
                         </li>
                     }
-
+              
+                    <li class="nav-item nav-category">
+                        <span class="nav-link">Compras</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" href="@Url.Action("ConsultarCarrito","Carrito")">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-shopping"></i>
+                            </span>
+                            <span class="menu-title">Ir a Compras</span>
+                        </a>
+                    </li>
 
 
 
@@ -191,7 +202,7 @@
                             </div>
                             <br />
                             <div style="margin-left: 2%; margin-top: 20px;">
-                                <i class="mdi mdi-coin"></i>@Session["Subt"].ToString()
+                                <i class="mdi mdi-coin"></i>@decimal.Parse(Session["Subt"].ToString()).ToString("N2") + iva
                             </div>
                             <br />
                             <div style="margin-left: 2%; margin-top: 20px;">

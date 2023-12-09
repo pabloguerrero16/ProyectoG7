@@ -49,7 +49,7 @@ namespace WebProyecto.Controllers
 
                 var datos = carritoModel.ConsultarCarrito(resp.ConUsuario);
                 Session["Cant"] = datos.Sum(x => x.Cantidad);
-                Session["Subt"] = datos.Sum(x => x.Precio);
+                Session["Subt"] = datos.Sum(x => x.SubTotal);
 
                 return RedirectToAction("Index", "Login");
             }

@@ -13,6 +13,12 @@ namespace WebProyecto.Entities
         public int Cantidad { get; set; }
         public DateTime FechaCarrito { get; set; }
         public decimal Precio { get; set; }
+        public string Nombre { get; set; }
+
+        public decimal SubTotal { get; set; }
+        public decimal Impuesto { get; set; }
+        public decimal Total { get; set; }
+
 
     } 
 }

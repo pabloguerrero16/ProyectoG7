@@ -33,5 +33,17 @@ namespace WebProyecto.Models
                 return res.Content.ReadFromJsonAsync<List<CarritoEnt>>().Result;
             }
         }
+
+        public int PagarCarrito(CarritoEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "PagarCarrito";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PostAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+
+        }
     }
 }
