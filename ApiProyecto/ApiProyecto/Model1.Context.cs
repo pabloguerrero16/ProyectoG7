@@ -57,6 +57,15 @@ namespace ApiProyecto
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesion_Result>("IniciarSesion", correoParameter, contrasennaParameter);
         }
     
+        public virtual int PagarCarrito_SP(Nullable<long> conUsuario)
+        {
+            var conUsuarioParameter = conUsuario.HasValue ?
+                new ObjectParameter("ConUsuario", conUsuario) :
+                new ObjectParameter("ConUsuario", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PagarCarrito_SP", conUsuarioParameter);
+        }
+    
         public virtual int RegistrarCuenta(string cedula, string nombre, string correo, string contrasenna)
         {
             var cedulaParameter = cedula != null ?

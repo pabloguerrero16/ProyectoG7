@@ -19,6 +19,7 @@ namespace ApiProyecto
         public long ConProducto { get; set; }
         public int CantidadCompra { get; set; }
         public decimal PrecioCompra { get; set; }
+        public decimal Impuesto { get; set; }
     
         public virtual MAESTRO MAESTRO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }

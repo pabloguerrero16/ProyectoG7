@@ -300,17 +300,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CARRITO](
-	[ConCarrito] [bigint] NOT NULL,
-	[ConUsuario] [bigint] NOT NULL,
-	[ConProducto] [bigint] NOT NULL,
-	[Cantidad] [int] NOT NULL,
-	[FechaCarrito] [datetime] NOT NULL,
+    [ConCarrito] [bigint] IDENTITY(1,1) NOT NULL,
+    [ConUsuario] [bigint] NOT NULL,
+    [ConProducto] [bigint] NOT NULL,
+    [Cantidad] [int] NOT NULL,
+    [FechaCarrito] [datetime] NOT NULL,
  CONSTRAINT [PK_CARRITO] PRIMARY KEY CLUSTERED 
 (
-	[ConCarrito] ASC
+    [ConCarrito] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
 /****** Object:  Table [dbo].[DETALLE]    Script Date: 8 dic. 2023 03:06:11 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -388,3 +387,9 @@ BEGIN
 	WHERE Correo = @Correo
 	AND Contrasenna = @Contrasenna
 END
+
+-- Agrega la columna [Impuesto] a la tabla DETALLE
+ALTER TABLE [dbo].[DETALLE]
+ADD [Impuesto] [decimal](18, 2) NOT NULL;
+
+

@@ -70,7 +70,7 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
 
-                context.PagarCarrito_SP(CARRITO.ConUsuario);
+                context.PagarCarrito_SP(carrito.ConUsuario);
 
                 return "OK";
             }

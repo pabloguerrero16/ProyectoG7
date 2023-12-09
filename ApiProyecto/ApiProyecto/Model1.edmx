@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CANTON">
           <Key>
             <PropertyRef Name="ConCanton" />
@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="ConCarrito" />
           </Key>
-          <Property Name="ConCarrito" Type="bigint" Nullable="false" />
+          <Property Name="ConCarrito" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ConUsuario" Type="bigint" Nullable="false" />
           <Property Name="ConProducto" Type="bigint" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
@@ -39,6 +39,7 @@
           <Property Name="ConProducto" Type="bigint" Nullable="false" />
           <Property Name="CantidadCompra" Type="int" Nullable="false" />
           <Property Name="PrecioCompra" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Impuesto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="MAESTRO">
           <Key>
@@ -188,30 +189,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CARRITO_CARRITO">
-          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
-          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO">
-              <PropertyRef Name="ConUsuario" />
-            </Principal>
-            <Dependent Role="CARRITO">
-              <PropertyRef Name="ConUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CARRITO_PRODUCTO">
-          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
-          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTO">
-              <PropertyRef Name="ConProducto" />
-            </Principal>
-            <Dependent Role="CARRITO">
-              <PropertyRef Name="ConProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DETALLE_MAESTRO">
           <End Role="MAESTRO" Type="Self.MAESTRO" Multiplicity="1" />
           <End Role="DETALLE" Type="Self.DETALLE" Multiplicity="*" />
@@ -252,6 +229,9 @@
         <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PagarCarrito_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConUsuario" Type="bigint" Mode="In" />
         </Function>
         <Function Name="RegistrarCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="varchar" Mode="In" />
@@ -299,14 +279,6 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_CARRITO_CARRITO" Association="Self.FK_CARRITO_CARRITO">
-            <End Role="USUARIO" EntitySet="USUARIO" />
-            <End Role="CARRITO" EntitySet="CARRITO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CARRITO_PRODUCTO" Association="Self.FK_CARRITO_PRODUCTO">
-            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
-            <End Role="CARRITO" EntitySet="CARRITO" />
-          </AssociationSet>
           <AssociationSet Name="FK_DETALLE_MAESTRO" Association="Self.FK_DETALLE_MAESTRO">
             <End Role="MAESTRO" EntitySet="MAESTRO" />
             <End Role="DETALLE" EntitySet="DETALLE" />
@@ -320,8 +292,7 @@
             <End Role="MAESTRO" EntitySet="MAESTRO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoG7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -364,6 +335,7 @@
           <Property Name="ConProducto" Type="Int64" Nullable="false" />
           <Property Name="CantidadCompra" Type="Int32" Nullable="false" />
           <Property Name="PrecioCompra" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Impuesto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="MAESTRO" Relationship="Self.FK_DETALLE_MAESTRO" FromRole="DETALLE" ToRole="MAESTRO" />
           <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DETALLE_PRODUCTO" FromRole="DETALLE" ToRole="PRODUCTO" />
         </EntityType>
@@ -657,6 +629,9 @@
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PagarCarrito_SP">
+          <Parameter Name="ConUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="RegistrarCuenta">
             <Parameter Name="Cedula" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -727,6 +702,7 @@
                 <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
                 <ScalarProperty Name="CantidadCompra" ColumnName="CantidadCompra" />
                 <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -830,6 +806,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PagarCarrito_SP" FunctionName="ProyectoG7Model.Store.PagarCarrito_SP" />
           <FunctionImportMapping FunctionImportName="RegistrarCuenta" FunctionName="ProyectoG7Model.Store.RegistrarCuenta" />
         </EntityContainerMapping>
       </Mapping>

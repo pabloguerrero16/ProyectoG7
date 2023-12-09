@@ -27,6 +27,8 @@ public class CarritoController : BaseController
 
         return Json("OK", JsonRequestBehavior.AllowGet);
     }
+
+
     [HttpGet]
     public ActionResult ConsultarCarrito()
     {
@@ -34,17 +36,21 @@ public class CarritoController : BaseController
         Session["Total"] = datos.Sum(x => x.Total);
         return View(datos);
     }
+
+
     [HttpPost]
     public ActionResult PagarCarrito()
     {
         CarritoEnt entidad = new CarritoEnt();
         entidad.ConUsuario = long.Parse(Session["ConUsuario"].ToString());
-        var proceso = carritoModel.PagarCarrito(entidad);
+        var resultado = carritoModel.PagarCarrito(entidad);
+
         var datos = carritoModel.ConsultarCarrito(long.Parse(Session["ConUsuario"].ToString()));
-        if (proceso > 0)
+        Session["Cant"] = datos.Sum(x => x.Cantidad);
+        Session["Subt"] = datos.Sum(x => x.SubTotal);
+
+        if (resultado != "")
         {
-            Session["Cant"] = datos.Sum(x => x.Cantidad);
-            Session["Subt"] = datos.Sum(x => x.SubTotal);
             return RedirectToAction("Index", "Login");
         }
         else

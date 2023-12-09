@@ -96,7 +96,7 @@ function AgregarCarrito(conProducto, disponible) {
 
     if (cantidad > disponible) {
 
-        aler("La cantidad igresada supera el stock disponible")
+        alert("La cantidad igresada supera el stock disponible")
 
     }
     else {
