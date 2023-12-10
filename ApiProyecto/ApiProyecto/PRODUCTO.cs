@@ -14,13 +14,6 @@ namespace ApiProyecto
     
     public partial class PRODUCTO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRODUCTO()
-        {
-            this.CARRITO = new HashSet<CARRITO>();
-            this.DETALLE = new HashSet<DETALLE>();
-        }
-    
         public long ConProducto { get; set; }
         public Nullable<long> ConModelo { get; set; }
         public Nullable<long> ConMarca { get; set; }
@@ -30,11 +23,7 @@ namespace ApiProyecto
         public string Nombre { get; set; }
         public string Imagen { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRITO> CARRITO { get; set; }
         public virtual CATEGORIA CATEGORIA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE> DETALLE { get; set; }
         public virtual MARCA MARCA { get; set; }
         public virtual MODELO MODELO { get; set; }
     }

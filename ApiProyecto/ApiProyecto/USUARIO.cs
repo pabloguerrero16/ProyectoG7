@@ -17,7 +17,6 @@ namespace ApiProyecto
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USUARIO()
         {
-            this.CARRITO = new HashSet<CARRITO>();
             this.MAESTRO = new HashSet<MAESTRO>();
         }
     
@@ -32,8 +31,6 @@ namespace ApiProyecto
         public string Imagen { get; set; }
     
         public virtual CANTON CANTON { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRITO> CARRITO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MAESTRO> MAESTRO { get; set; }
         public virtual PROVINCIA PROVINCIA { get; set; }

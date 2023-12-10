@@ -15,6 +15,9 @@ namespace WebProyecto.Entities
         public decimal Precio { get; set; }
         public string Nombre { get; set; }
 
+        public string Modelo {  get; set; }
+        public string Marca {  get; set; }
+
         public decimal SubTotal { get; set; }
         public decimal Impuesto { get; set; }
         public decimal Total { get; set; }

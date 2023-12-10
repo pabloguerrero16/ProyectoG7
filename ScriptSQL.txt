@@ -316,11 +316,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[DETALLE](
-	[ConDetalle] [bigint] NOT NULL,
-	[ConMaestro] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConDetalle] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConMaestro] [bigint] NOT NULL,
 	[ConProducto] [bigint] NOT NULL,
 	[CantidadCompra] [int] NOT NULL,
 	[PrecioCompra] [decimal](18, 2) NOT NULL,
+	[Impuesto] [decimal](18, 2) NOT NULL,
  CONSTRAINT [PK_DETALLE] PRIMARY KEY CLUSTERED 
 (
 	[ConDetalle] ASC
@@ -388,8 +389,52 @@ BEGIN
 	AND Contrasenna = @Contrasenna
 END
 
--- Agrega la columna [Impuesto] a la tabla DETALLE
-ALTER TABLE [dbo].[DETALLE]
-ADD [Impuesto] [decimal](18, 2) NOT NULL;
+CREATE PROCEDURE PagarCarrito_SP
+    @ConUsuario BIGINT
+AS
+BEGIN
+    DECLARE @TotalFactura AS DECIMAL(18, 2);
+    DECLARE @CodigoMaestro AS BIGINT;
+
+    SELECT @TotalFactura = SUM(P.Precio * C.Cantidad) + SUM(P.Precio * C.Cantidad) * 0.13
+    FROM CARRITO C
+    INNER JOIN PRODUCTO P ON C.ConProducto = P.ConProducto
+    WHERE ConUsuario = @ConUsuario;
+
+    INSERT INTO dbo.MAESTRO(ConUsuario, TotalFactura, FechaCompra)
+    VALUES(@ConUsuario, @TotalFactura, GETDATE());
+
+    SET @CodigoMaestro = @@IDENTITY;
+
+    INSERT INTO dbo.DETALLE(ConMaestro, ConProducto, CantidadCompra, PrecioCompra, Impuesto)
+    SELECT @CodigoMaestro, C.ConProducto, C.Cantidad, P.Precio, (C.Cantidad * P.Precio) * 0.13
+    FROM CARRITO C
+    INNER JOIN PRODUCTO P ON C.ConProducto = P.ConProducto
+    WHERE @ConUsuario = @ConUsuario;
+
+    UPDATE P
+    SET P.Stock -= C.Cantidad
+    FROM PRODUCTO P
+    INNER JOIN CARRITO C ON C.ConProducto = P.ConProducto
+    WHERE ConUsuario = @ConUsuario;
+
+    DELETE FROM dbo.CARRITO
+    WHERE ConUsuario = @ConUsuario;
+END
+GO
+
+Debo de cambiar algo? Esta es mi nueva tabla:
+CREATE TABLE [dbo].[DETALLE](
+	[ConDetalle] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConMaestro] [bigint] NOT NULL,
+	[ConProducto] [bigint] NOT NULL,
+	[CantidadCompra] [int] NOT NULL,
+	[PrecioCompra] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_DETALLE] PRIMARY KEY CLUSTERED 
+(
+	[ConDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
 

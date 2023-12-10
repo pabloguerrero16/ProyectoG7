@@ -4,88 +4,97 @@
     ViewBag.Title = "ConsultarProductos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Informacion del Carrito</h4>
-            @if (ViewBag.MensajeUsuario != null)
-            {
-                <div class="alert alert-info" role="alert" style="text-align:center">
-                    @ViewBag.MensajeUsuario
-                </div>
-            }
-            <br>
-
-            @if (Model.Count() > 0)
-            {
-                <div class="table-responsive">
-                    <table id="tableData" class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th style="color: white"> Nombre </th>
-                                <th style="color: white"> Cantidad </th>
-                                <th style="color: white"> Precio Unitario </th>
-                                <th style="color: white"> Sub Total </th>
-                                <th style="color: white"> Impuesto </th>
-                                <th style="color: white"> Total </th>
-                                <th style="color: white"> Eliminar </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td style="color: white"> @item.Nombre </td>
-                                    <td style="color: white"> @item.Cantidad </td>
-                                    <td style="color: white"> @item.Precio.ToString("N2") </td>
-                                    <td style="color: white"> @item.SubTotal.ToString("N2") </td>
-                                    <td style="color: white"> @item.Impuesto.ToString("N2") </td>
-                                    <td style="color: white"> @item.Total.ToString("N2") </td>
-
-                                    <td style="text-align:center">
-                                        <a href="@Url.Action("ActualizarProducto", "Producto", new { q = item.ConProducto })" class="btn btn-danger btn-fw">
-                                            <i class="mdi mdi-delete"></i> Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-6">
-                        <p class="font-weight-bold text-center">El monto total a pagar es de: @decimal.Parse(Session["Total"].ToString()).ToString("N2")</p>
-                    </div>
-                    <div class="col-md-6">
-                        @using (Html.BeginForm("PagarCarrito", "Carrito", FormMethod.Post))
-                        {
-                            <button type="submit" class="btn btn-primary btn-block">Pagar</button>
-                        }
-                    </div>
-                </div>
-
-            }
-            else
-            {
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Error</h5>
-                        <div class="row">
-                            <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                                <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                    <h2 class="mb-0">No hay ningún vehículo registrado</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal"></h6>
-                            </div>
-                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                                <i class="icon-lg mdi mdi-close-box-outline text-primary ml-auto"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+<div class="card-body">
+    <h4 class="card-title">Informacion del Carrito</h4>
+    @if (ViewBag.MensajeUsuario != null)
+    {
+        <div class="alert alert-info" role="alert" style="text-align:center">
+            @ViewBag.MensajeUsuario
         </div>
+    }
+    <br>
+
+    <div id="loadingJumbotron" class="jumbotron text-center" style="display:none;">
+        <h1>Cargando...</h1>
     </div>
+
+
+    @if (Model.Count() > 0)
+    {
+        <div class="container mt-5 p-3 rounded cart" style="background-color: #191c24;">
+            <div class="row no-gutters">
+                <div class="col-md-8">
+                    <div class="product-details mr-2">
+                        <div class="d-flex flex-row align-items-center">
+                            <a href="#" style="color: inherit">
+                                <i class="mdi mdi-arrow-left-bold"></i><span class="ml-2">Continuar Comprando</span>
+                            </a>
+                        </div>
+                        <hr>
+                        <h6 class="mb-0">Tu Carrito</h6>
+                        <div class="d-flex justify-content-between">
+                            <span>Tienes @Session["Cant"].ToString() productos en tu carrito</span>
+
+                        </div>
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                                <div class="d-flex flex-row">
+                                    <div class="ml-2"><span class="font-weight-bold d-block">@item.Marca @item.Modelo</span><span class="spec"> @item.Nombre</span></div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center">
+                                    <span class="d-block">@item.Cantidad</span><span class="d-block ml-5 font-weight-bold">$@item.Precio</span>
+                                    <a href="@Url.Action("Index", "Login")"><i class="mdi mdi-delete-forever text-red" style="font-size: 2em;"></i></a>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="payment-info">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>@Session["Nombre"]</span>
+                            @if (Session["Imagen"] != null)
+                            {
+                                var imagenPath = Session["Imagen"]?.ToString();
+                                <img class="rounded" src="@Url.Content(imagenPath)" width="30">
+                            }
+
+                        </div><span class="type d-block mt-3 mb-1">Card type</span>
+
+                        <label class="radio"> <input type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span> </label>
+
+                        <hr class="line">
+                        <input type="hidden" value="@decimal.Parse(Session["Total"].ToString()).ToString("N2")" id="precio" />
+                        <div class="d-flex justify-content-between information"><span>Total(Incl. impuestos)</span><span>$@decimal.Parse(Session["Total"].ToString()).ToString("N2")</span></div><button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button" onclick="pagar()"><span>$@decimal.Parse(Session["Total"].ToString()).ToString("N2")</span><span>Pagar<i class="mdi mdi-arrow-right-bold"></i></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5>Error</h5>
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0">No hay ningún vehículo registrado</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal"></h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-close-box-outline text-primary ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
+

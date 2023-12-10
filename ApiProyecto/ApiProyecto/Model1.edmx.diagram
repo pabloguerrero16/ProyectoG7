@@ -4,25 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f534b3953324c528f513b6131883e28" Name="Diagram1">
-        <EntityTypeShape EntityType="ProyectoG7Model.CANTON" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.CARRITO" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.DETALLE" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MAESTRO" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.PROVINCIA" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.Rol" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoG7Model.USUARIO" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+      <Diagram DiagramId="8e264dcdea274e54943663a4672918fc" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoG7Model.CANTON" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CARRITO" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.CATEGORIA" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.DETALLE" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MAESTRO" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MARCA" Width="1.5" PointX="5.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.MODELO" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.PRODUCTO" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.PROVINCIA" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.Rol" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoG7Model.USUARIO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="ProyectoG7Model.FK__CANTON__IdProvin__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__USUARIO__ConCant__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_CARRITO" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK_CARRITO_PRODUCTO" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConCat__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_MAESTRO" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoG7Model.FK_DETALLE_PRODUCTO" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK_MAESTRO_USUARIO" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMar__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoG7Model.FK__PRODUCTO__ConMod__4F7CD00D" ManuallyRouted="false" />

@@ -14,19 +14,11 @@ namespace ApiProyecto
     
     public partial class MAESTRO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MAESTRO()
-        {
-            this.DETALLE = new HashSet<DETALLE>();
-        }
-    
         public long ConMaestro { get; set; }
         public long ConUsuario { get; set; }
         public decimal TotalFactura { get; set; }
         public string FechaCompra { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DETALLE> DETALLE { get; set; }
         public virtual USUARIO USUARIO { get; set; }
     }
 }

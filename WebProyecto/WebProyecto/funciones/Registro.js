@@ -114,3 +114,42 @@ function AgregarCarrito(conProducto, disponible) {
     }
 
 }
+
+function pagar() {
+
+    var precio = $("#precio").val();
+    var precioFormateado = precio.replace(/\s/g, '').replace(',', '.');
+
+    var body = {
+        precio:precioFormateado,
+        producto: "Compra en Grupo Volkswagen"
+    }
+
+    $("#loadingJumbotron").show();
+
+    jQuery.ajax({
+        url: paypalUrl,
+        type: "POST",
+        data: JSON.stringify(body),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {;
+            $("#loadingJumbotron").hide();
+            if (data.status) {
+                var jsonresult = JSON.parse(data.respuesta);
+                console.log(jsonresult)
+                var links = jsonresult.links;
+                var resultado = links.find(item => item.rel === "approve")
+                window.location.href = resultado.href
+
+                console.log(links)
+                console.log(resultado)
+            } else {
+                alert("Vuelva a intentar más tarde")
+            }
+        },
+        beforesend: function () {
+            $("#loadingJumbotron").LoadingOverlay("show");
+        }
+    });
+}

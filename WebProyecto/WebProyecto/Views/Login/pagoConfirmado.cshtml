@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "pagoConfirmado";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+<div class="bg" style="width: 10000px">
+
+    <div class="card">
+
+        <span class="card__success"><i class="mdi mdi-marker-check" style="font-size: 6em;"></i></span>
+
+        <h1 class="card__msg">Pago Exitoso</h1>
+        <h2 class="card__submsg">Gracias por comprar con nostros</h2>
+
+        <div class="card__body">
+
+            @if (Session["Imagen"] != null)
+            {
+                var imagenPath = Session["Imagen"]?.ToString();
+                <img src="@Url.Content(imagenPath)" class="card__avatar" style="width: 50px; height: auto;">
+            }
+
+
+            <div class="card__recipient-info">
+                <p class="card__recipient">@Session["Nombre"]</p>
+                <p class="card__email">@Session["Correo"]</p>
+            </div>
+
+            <h1 class="card__price"><span>$</span>@ViewData["Total"]</h1>
+
+            <p class="card__method">Método de pago</p>
+            <div class="card__payment">
+                <img src="~/Images/paypal.png" class="card__credit-card" style="width: 300px; height: auto;">
+                <div class="card__card-details">
+                    <p class="card__card-type">PayPal</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card__tags">
+            <span class="card__tag">Transcacción:</span>
+            <span class="card__tag">@ViewData["IdTransaccion"]</span>
+        </div>
+
+        <center>
+            <a class="btn btn-success btn-fw" style="font-size: 24px; padding: 20px 40px; margin-top: 40px;" href="@Url.Action("Index","Login")">Continuar</a>
+        </center>
+
+    </div>
+
+</div>
+

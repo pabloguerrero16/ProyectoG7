@@ -19,8 +19,5 @@ namespace ApiProyecto
         public long ConProducto { get; set; }
         public int Cantidad { get; set; }
         public System.DateTime FechaCarrito { get; set; }
-    
-        public virtual USUARIO USUARIO { get; set; }
-        public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }
