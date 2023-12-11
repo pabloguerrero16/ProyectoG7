@@ -79,6 +79,61 @@ namespace ApiProyecto.Controllers
                 return "OK";
             }
         }
+
+        [HttpDelete]
+        [Route("EliminarProductoCarrito")]
+        public void EliminarProductoCarrito(long q)
+        {
+            using (var context = new ProyectoG7Entities())
+
+            {
+                var datos = (from x in context.CARRITO
+                             where x.ConCarrito == q
+                             select x).FirstOrDefault();
+
+                context.CARRITO.Remove(datos);
+                context.SaveChanges();
+            }
+        }
+
+        [HttpGet]
+        [Route("ConsultarFacturas")]
+        public List<FACTURA> ConsultarFacturas(long q)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                return (from x in context.FACTURA
+                        where x.ConUsuario == q
+                        select x).ToList();
+            }
+        }
+
+        [HttpGet]
+        [Route("ConsultarDetalleFactura")]
+        public object ConsultarDetalleFactura(long q)
+        {
+            using (var context = new ProyectoG7Entities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                return (from x in context.TDetalle
+                        join y in context.TProducto on x.ConProducto equals y.ConProducto
+                        where x.ConMaestro == q
+                        select new
+                        {
+                            x.ConFACTURA,
+                            x.PrecioCompra,
+                            x.CantidadCompra,
+                            x.Impuesto,
+                            y.Nombre,
+                            SubTotal = x.PrecioCompra * x.CantidadCompra,
+                            ImpuestoTotal = x.Impuesto * x.CantidadCompra,
+                            Total = (x.PrecioCompra * x.CantidadCompra) + (x.Impuesto * x.CantidadCompra)
+                        }).ToList();
+            }
+        }
+
+
     }
 }
 
