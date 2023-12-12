@@ -118,6 +118,8 @@ namespace ApiProyecto.Controllers
                 context.Configuration.LazyLoadingEnabled = false;
                 return (from x in context.DETALLE
                         join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
+                        join m in context.MODELO on y.ConModelo equals m.ConModelo
+                        join ma in context.MARCA on y.ConMarca equals ma.ConMarca
                         where x.ConMaestro == q
                         select new
                         {
@@ -126,6 +128,8 @@ namespace ApiProyecto.Controllers
                             x.CantidadCompra,
                             x.Impuesto,
                             y.Nombre,
+                            Modelo = m.Descripcion,
+                            Marca = ma.Descripcion,
                             SubTotal = x.PrecioCompra * x.CantidadCompra,
                             ImpuestoTotal = x.Impuesto * x.CantidadCompra,
                             Total = (x.PrecioCompra * x.CantidadCompra) + (x.Impuesto * x.CantidadCompra)

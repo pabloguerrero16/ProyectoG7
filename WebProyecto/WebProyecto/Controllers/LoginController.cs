@@ -185,6 +185,28 @@ namespace WebProyecto.Controllers
 
             return Json(new { status = status, respuesta = respuesta }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult RecuperarCuenta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarCuenta(UsuarioEnt ent)
+        {
+            var resp = usuarioModel.RecuperarCuenta(ent);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("IniciarSesion", "Login");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se ha podido enviar el correo con su información";
+                return View();
+            }
+        }
     }
 
 }

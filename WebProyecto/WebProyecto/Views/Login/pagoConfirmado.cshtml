@@ -45,7 +45,10 @@
         </div>
 
         <center>
-            <a class="btn btn-success btn-fw" style="font-size: 24px; padding: 20px 40px; margin-top: 40px;" href="@Url.Action("Index","Login")">Continuar</a>
+            @using (Html.BeginForm("PagarCarrito", "Carrito", FormMethod.Post))
+            {
+                <input type="submit" class="btn btn-success btn-fw"  style="font-size: 24px; padding: 20px 40px; margin-top: 40px;" value="Continuar">
+            }
         </center>
 
     </div>

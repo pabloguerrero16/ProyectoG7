@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Entities\CarritoEnt.cs" />
+    <Compile Include="Entities\FacturasEnt.cs" />
     <Compile Include="Entities\ProductoEnt.cs" />
     <Compile Include="Entities\UsuarioEnt.cs" />
     <Compile Include="Global.asax.cs">
@@ -1176,6 +1177,9 @@
     <Content Include="Views\Producto\ActualizarProducto.cshtml" />
     <Content Include="Views\Carrito\ConsultarCarrito.cshtml" />
     <Content Include="Views\Login\pagoConfirmado.cshtml" />
+    <Content Include="Views\Carrito\ConsultarDetalleFactura.cshtml" />
+    <Content Include="Views\Carrito\ConsultarFacturas.cshtml" />
+    <Content Include="Views\Login\RecuperarCuenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

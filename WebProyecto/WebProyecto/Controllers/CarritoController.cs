@@ -51,6 +51,8 @@ public class CarritoController : BaseController
 
         if (resultado != "")
         {
+            Session["Cant"] = datos.Sum(x => x.Cantidad);
+            Session["Subt"] = datos.Sum(x => x.SubTotal);
             return RedirectToAction("Index", "Login");
         }
         else
@@ -59,6 +61,31 @@ public class CarritoController : BaseController
             return View("ConsultarCarrito",datos);
         }
     }
+
+    [HttpGet]
+    public ActionResult EliminarProductoCarrito(long q)
+    {
+        carritoModel.EliminarProductoCarrito(q);
+        var datos = carritoModel.ConsultarCarrito(long.Parse(Session["ConUsuario"].ToString()));
+        Session["Cant"] = datos.Sum(x => x.Cantidad);
+        Session["Subt"] = datos.Sum(x => x.SubTotal);
+        return RedirectToAction("ConsultarCarrito", "Carrito");
+    }
+
+    [HttpGet]
+    public ActionResult ConsultarFacturas()
+    {
+        var datos = carritoModel.ConsultarFacturas(long.Parse(Session["ConUsuario"].ToString()));
+        return View(datos);
+    }
+
+    [HttpGet]
+    public ActionResult ConsultarDetalleFactura(long q)
+    {
+        var datos = carritoModel.ConsultarDetalleFactura(q);
+        return View(datos);
+    }
+
 
 }
 

@@ -45,5 +45,40 @@ namespace WebProyecto.Models
             }
 
         }
+
+        public void EliminarProductoCarrito(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "EliminarProductoCarrito?q="+q;
+                var resp = client.DeleteAsync(url).Result;
+            }
+        }
+
+        public void EliminarCarrito(long q)
+        {
+
+        }
+
+
+        public List<FacturasEnt> ConsultarFacturas (long q)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ConsultarFacturas?q=" + q;
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<List<FacturasEnt>>().Result;   
+            }
+        }
+
+        public List<FacturasEnt> ConsultarDetalleFactura(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ConsultarDetalleFactura?q=" + q;
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<List<FacturasEnt>>().Result;
+            }
+        }
     }
 }

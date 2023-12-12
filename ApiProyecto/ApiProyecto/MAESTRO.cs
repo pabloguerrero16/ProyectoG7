@@ -17,7 +17,7 @@ namespace ApiProyecto
         public long ConMaestro { get; set; }
         public long ConUsuario { get; set; }
         public decimal TotalFactura { get; set; }
-        public string FechaCompra { get; set; }
+        public System.DateTime FechaCompra { get; set; }
     
         public virtual USUARIO USUARIO { get; set; }
     }

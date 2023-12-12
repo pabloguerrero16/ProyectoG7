@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CANTON">
           <Key>
             <PropertyRef Name="ConCanton" />
@@ -48,7 +48,7 @@
           <Property Name="ConMaestro" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ConUsuario" Type="bigint" Nullable="false" />
           <Property Name="TotalFactura" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="FechaCompra" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="FechaCompra" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="MARCA">
           <Key>
@@ -260,7 +260,8 @@
             <End Role="MAESTRO" EntitySet="MAESTRO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoG7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -301,7 +302,7 @@
           <Property Name="ConProducto" Type="Int64" Nullable="false" />
           <Property Name="CantidadCompra" Type="Int32" Nullable="false" />
           <Property Name="PrecioCompra" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Impuesto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Impuesto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="MAESTRO">
           <Key>
@@ -310,7 +311,7 @@
           <Property Name="ConMaestro" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ConUsuario" Type="Int64" Nullable="false" />
           <Property Name="TotalFactura" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="FechaCompra" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_MAESTRO_USUARIO" FromRole="MAESTRO" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="MARCA">
@@ -526,7 +527,7 @@
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PagarCarrito_SP">
-          <Parameter Name="ConUsuario" Mode="In" Type="Int64" />
+            <Parameter Name="ConUsuario" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="RegistrarCuenta">
             <Parameter Name="Cedula" Mode="In" Type="String" />
@@ -593,12 +594,12 @@
           <EntitySetMapping Name="DETALLE">
             <EntityTypeMapping TypeName="ProyectoG7Model.DETALLE">
               <MappingFragment StoreEntitySet="DETALLE">
-                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
                 <ScalarProperty Name="ConDetalle" ColumnName="ConDetalle" />
                 <ScalarProperty Name="ConMaestro" ColumnName="ConMaestro" />
                 <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
                 <ScalarProperty Name="CantidadCompra" ColumnName="CantidadCompra" />
                 <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

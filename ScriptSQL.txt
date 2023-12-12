@@ -337,7 +337,7 @@ CREATE TABLE [dbo].[MAESTRO](
 	[ConMaestro] [bigint] IDENTITY(1,1) NOT NULL,
 	[ConUsuario] [bigint] NOT NULL,
 	[TotalFactura] [decimal](18, 2) NOT NULL,
-	[FechaCompra] [nchar](10) NOT NULL,
+	[FechaCompra] [datetime] NOT NULL,
  CONSTRAINT [PK_MAESTRO] PRIMARY KEY CLUSTERED 
 (
 	[ConMaestro] ASC
@@ -423,7 +423,7 @@ BEGIN
 END
 GO
 
-Debo de cambiar algo? Esta es mi nueva tabla:
+
 CREATE TABLE [dbo].[DETALLE](
 	[ConDetalle] [bigint] IDENTITY(1,1) NOT NULL,
 	[ConMaestro] [bigint] NOT NULL,
