@@ -98,12 +98,12 @@ namespace ApiProyecto.Controllers
 
         [HttpGet]
         [Route("ConsultarFacturas")]
-        public List<FACTURA> ConsultarFacturas(long q)
+        public List<MAESTRO> ConsultarFacturas(long q)
         {
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return (from x in context.FACTURA
+                return (from x in context.MAESTRO
                         where x.ConUsuario == q
                         select x).ToList();
             }
@@ -116,12 +116,12 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return (from x in context.TDetalle
-                        join y in context.TProducto on x.ConProducto equals y.ConProducto
+                return (from x in context.DETALLE
+                        join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
                         where x.ConMaestro == q
                         select new
                         {
-                            x.ConFACTURA,
+                            x.ConMaestro,
                             x.PrecioCompra,
                             x.CantidadCompra,
                             x.Impuesto,
