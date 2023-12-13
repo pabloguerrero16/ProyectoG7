@@ -3,4 +3,88 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container-fluid" style="color: white;">
+    <div class="jumbotron mt-5" style="background-color: #191c24">
+        <h1 class="display-4">¡Bienvenidos a Volkswagen!</h1>
+        <p class="lead">Descubre nuestra amplia gama de vehículos.</p>
+
+        <!-- Sección de Modelos -->
+        <hr class="my-4">
+        <h2>Explora Nuestros Productos</h2>
+        <p>Desde vehículos compactos hasta SUVs, Volkswagen tiene el modelo perfecto para ti.</p>
+        <a class="btn btn-primary btn-lg" href="@Url.Action("ListarProductos", "Productos")" role="button">Ver Tienda Principal</a>
+
+        <!-- Sección de Vídeo -->
+        <hr class="my-4">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/q_S9BMvfHAc" allowfullscreen></iframe>
+        </div>
+        <br />
+        <h2>¿Quieres aprender más sobre nosotros?</h2>
+        <p>Visita la wiki!</p>
+        <a class="btn btn-primary btn-lg" href="https://es.wikipedia.org/wiki/Volkswagen" role="button">Explora</a>
+        <br />
+        <br />
+        <center>
+            <h3>Nuestras Marcas</h3>
+        </center>
+        <br />
+
+        <article class="postcard dark blue">
+            <a class="postcard__img_link" href="https://localhost:44383/Producto/FiltrarMarca?q=1">
+                <img class="postcard__img" src="~/template//images/volks.jpg" alt="Image Title" />
+            </a>
+            <div class="postcard__text">
+                <h1 class="postcard__title blue">Volkswagen</h1>
+                <div class="postcard__subtitle small">
+                    <time datetime="2020-05-25 12:00:00">
+                        <i class="fas fa-calendar-alt mr-2"></i>Fundada el 28 de mayo de 1937 en Berlín, Alemania
+                    </time>
+                </div>
+                <div class="postcard__bar"></div>
+                <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
+            </div>
+        </article>
+        <br />
+        <br />
+        <article class="postcard dark blue">
+            <a class="postcard__img_link" href="https://localhost:44383/Producto/FiltrarMarca?q=2">
+                <img class="postcard__img" src="~/template//images/audi.jpg" alt="Image Title" />
+            </a>
+            <div class="postcard__text">
+                <h1 class="postcard__title blue">Audi</h1>
+                <div class="postcard__subtitle small">
+                    <time datetime="2020-05-25 12:00:00">
+                        <i class="fas fa-calendar-alt mr-2"></i>Fundada el 16 de julio de 1909 en Zwickau, Alemania
+                    </time>
+                </div>
+                <div class="postcard__bar"></div>
+                <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
+            </div>
+        </article>
+        <br />
+        <br />
+        <article class="postcard dark blue">
+            <a class="postcard__img_link" href="https://localhost:44383/Producto/FiltrarMarca?q=3">
+                <img class="postcard__img" src="~/template/images/Lambo.jpg" alt="Image Title" />
+            </a>
+            <div class="postcard__text">
+                <h1 class="postcard__title blue">Lamborghini</h1>
+                <div class="postcard__subtitle small">
+                    <time datetime="2020-05-25 12:00:00">
+                        <i class="fas fa-calendar-alt mr-2"></i>Fundada en mayo de 196 en Sant'Agata Bolognese, Italia
+                    </time>
+                </div>
+                <div class="postcard__bar"></div>
+                <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
+            </div>
+        </article>
+        <br />
+        <br />
+
+
+
+    </div>
+</div>
+
 

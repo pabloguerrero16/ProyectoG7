@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+
+
+
     //FUNCIÓN PARA VALIDAR CORREO 1
     $("#Correo").keyup(function () {
         if (validarCorreo()) {

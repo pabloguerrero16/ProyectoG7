@@ -253,6 +253,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="template\css\style.css" />
     <Content Include="template\css\extra.css" />
+    <Content Include="template\images\audi.jpg" />
     <Content Include="template\images\auth\lockscreen-bg.jpg" />
     <Content Include="template\images\auth\login-bg.jpg" />
     <Content Include="template\images\auth\Login_bg.jpg" />
@@ -346,6 +347,7 @@
     <Content Include="template\images\file-icons\64\006-record.png" />
     <Content Include="template\images\file-icons\64\007-folder.png" />
     <Content Include="template\images\file-icons\64\008-archive.png" />
+    <Content Include="template\images\Lambo.jpg" />
     <Content Include="template\images\lightbox\play-button.png" />
     <Content Include="template\images\lightbox\thumb-v-v-1.jpg" />
     <Content Include="template\images\lightbox\thumb-v-v-2.jpg" />
@@ -413,6 +415,7 @@
     <Content Include="template\images\sprites\logo-mini.svg" />
     <Content Include="template\images\sprites\red.png" />
     <Content Include="template\images\sprites\yellow.png" />
+    <Content Include="template\images\volks.jpg" />
     <Content Include="template\js\ace.js" />
     <Content Include="template\js\alerts.js" />
     <Content Include="template\js\avgrund.js" />
